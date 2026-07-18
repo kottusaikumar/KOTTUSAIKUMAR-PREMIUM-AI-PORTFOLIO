@@ -332,6 +332,16 @@
 .cert-title { font-weight: 700; color: var(--paper); }
 .cert-issuer { color: rgb(244 240 229 / 86%); }
 
+@media (min-width: 1400px) and (max-height: 1000px) {
+  .capabilities-section { padding-block: 5.5rem 6.5rem; }
+  .capabilities-shell { max-width: 82rem; gap: 1.7rem; }
+  .capabilities-role-title { font-size: clamp(2.1rem, 3vw, 3rem); }
+  .capabilities-panel { padding: 1.8rem; }
+  .skill-grid { gap: .7rem; }
+  .skill-tile { gap: .38rem; padding: .65rem .45rem .72rem; }
+  .capabilities-certifications { margin-top: .2rem; }
+}
+
 /* --- Responsive ----------------------------------------------------------- */
 
 @media (max-width: 1024px) {
