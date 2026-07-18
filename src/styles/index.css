@@ -184,7 +184,7 @@ h2 { margin-bottom: 0; font-size: clamp(3.3rem, 7.2vw, 8.5rem); }
 .scroll-hint { position: absolute; z-index: 3; bottom: 2.2rem; left: var(--gutter); font-size: .72rem; letter-spacing: .14em; text-decoration: none; text-transform: uppercase; }
 
 /* Persistent controls */
-.pill-nav { --pill-glass: linear-gradient(145deg, rgb(20 55 42 / 20%), rgb(6 28 20 / 28%)); --pill-glass-border: rgb(255 255 255 / 28%); position: fixed; z-index: 80; left: 50%; bottom: max(1.15rem, env(safe-area-inset-bottom)); width: min(calc(100vw - 2rem), 32rem); color: var(--white); opacity: 0; transform: translate(-50%, 1.5rem); pointer-events: none; transition: opacity .45s var(--ease-enter), transform .45s var(--ease-enter); }
+.pill-nav { --pill-glass: linear-gradient(145deg, rgb(20 55 42 / 20%), rgb(6 28 20 / 28%)); --pill-glass-border: rgb(255 255 255 / 28%); position: fixed; z-index: 80; left: 50%; bottom: max(1.15rem, env(safe-area-inset-bottom)); width: min(calc(100vw - 2rem), 30.5rem); color: var(--white); opacity: 0; transform: translate(-50%, 1.5rem); pointer-events: none; transition: opacity .45s var(--ease-enter), transform .45s var(--ease-enter); }
 .pill-nav.visible { opacity: 1; transform: translate(-50%, 0); pointer-events: auto; }
 .pill-nav.assistant-active { opacity: 0; transform: translate(-50%, 1.5rem); pointer-events: none; }
 .audio-control { display: flex; align-items: center; gap: .45rem; }
@@ -618,7 +618,7 @@ h2 { margin-bottom: 0; font-size: clamp(3.3rem, 7.2vw, 8.5rem); }
    especially tall (common on 1080p laptops/desktops and at browser zoom).
    The book/project journey is intentionally excluded. */
 @media (min-width: 1400px) and (max-height: 1000px) {
-  .pill-nav { width: min(calc(100vw - 2rem), 28rem); }
+  .pill-nav { width: min(calc(100vw - 2rem), 26.5rem); }
   .pill-dock { min-height: 3.75rem; grid-template-columns: 3rem minmax(0, 1fr) 4rem; gap: .28rem; padding: .28rem; }
   .pill-assistant-button,
   .pill-nav .audio-control .icon-button { width: 3rem; height: 3rem; }
@@ -823,7 +823,7 @@ h2 { margin-bottom: 0; font-size: clamp(3.3rem, 7.2vw, 8.5rem); }
   .hero-frame-skills { top: 10%; left: var(--gutter); }
   .hero-frame-proof { right: var(--gutter); bottom: 12%; }
   .scroll-hint { display: none; }
-  .pill-nav { width: min(calc(100% - 2.75rem), 25.5rem); bottom: max(.65rem, env(safe-area-inset-bottom)); }
+  .pill-nav { width: min(calc(100% - 3.75rem), 24.5rem); bottom: max(.65rem, env(safe-area-inset-bottom)); }
   .pill-dock { min-height: 3.75rem; grid-template-columns: 3rem minmax(0, 1fr) 3.85rem; gap: .27rem; padding: .28rem; }
   .pill-assistant-button { width: 3rem; height: 3rem; font-size: .6rem; }
   .pill-assistant-icon { width: 1.86rem; height: 1.86rem; }
