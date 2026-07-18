@@ -81,11 +81,11 @@ export function ExperienceTimeline() {
 
       const timeline = gsap.timeline({ paused: true, defaults: { ease: 'none' } })
       timeline
-        .to({}, { duration: 0.55 })
+        .to({}, { duration: 0.3 })
         .addLabel('project-two')
-        .to(projectSlides[0], { yPercent: -100, duration: 1 })
-        .to(projectSlides[1], { yPercent: 0, duration: 1 }, '<')
-        .to({}, { duration: 0.7 })
+        .to(projectSlides[0], { yPercent: -100, duration: 1.2 })
+        .to(projectSlides[1], { yPercent: 0, duration: 1.2 }, '<')
+        .to({}, { duration: 0.9 })
 
       const setActiveStep = (activeIndex: number) => {
         steps.forEach((step, index) => step.classList.toggle('active', index === activeIndex))
@@ -94,13 +94,13 @@ export function ExperienceTimeline() {
       const trigger = ScrollTrigger.create({
         trigger: stage,
         start: 'top 7%',
-        end: () => `+=${Math.round(window.innerHeight * 1.55)}`,
+        end: () => `+=${Math.round(window.innerHeight * 2.8)}`,
         pin: stage,
         animation: timeline,
-        scrub: 0.32,
+        scrub: 0.1,
         anticipatePin: 1,
         invalidateOnRefresh: true,
-        onUpdate: ({ progress }) => setActiveStep(progress < 0.5 ? 0 : 1),
+        onUpdate: ({ progress }) => setActiveStep(progress < 0.45 ? 0 : 1),
       })
 
       setActiveStep(0)
