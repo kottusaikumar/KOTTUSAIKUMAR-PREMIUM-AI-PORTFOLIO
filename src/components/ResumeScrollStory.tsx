@@ -11,6 +11,7 @@ import {
   siTensorflow,
   type SimpleIcon,
 } from 'simple-icons'
+import { personal } from '../data/portfolio'
 import { useReducedMotion } from '../hooks/useReducedMotion'
 
 gsap.registerPlugin(ScrollTrigger)
@@ -58,6 +59,11 @@ export function ResumeScrollStory() {
   )
 
   useEffect(() => {
+    if (reducedMotion) {
+      setAuxiliaryMediaReady(false)
+      return
+    }
+
     const preload = (sources: string[]) => sources.forEach((source) => {
       const image = new Image()
       image.decoding = 'async'
@@ -109,7 +115,7 @@ export function ResumeScrollStory() {
       if (idleId) window.cancelIdleCallback(idleId)
       if (fallbackId) window.clearTimeout(fallbackId)
     }
-  }, [frames])
+  }, [frames, reducedMotion])
 
   useEffect(() => {
     const section = sectionRef.current
@@ -257,6 +263,41 @@ export function ResumeScrollStory() {
     requestAnimationFrame(() => ScrollTrigger.refresh())
     return () => context.revert()
   }, [frames, reducedMotion])
+
+  if (reducedMotion) {
+    return (
+      <section className="resume-story reduced" aria-labelledby="resume-story-title">
+        <div className="resume-reduced-shell">
+          <header className="resume-reduced-header">
+            <p>01 / SOURCE DOCUMENT</p>
+            <h2 id="resume-story-title">The work begins with the <em>record.</em></h2>
+          </header>
+          <div className="resume-reduced-layout">
+            <figure className="resume-reduced-document">
+              <img
+                src="resume-scroll/responsive/resume-00-720.webp"
+                srcSet="resume-scroll/responsive/resume-00-480.webp 480w, resume-scroll/responsive/resume-00-720.webp 720w, resume-scroll/frames/resume-00.webp 1000w"
+                sizes="(max-width: 767px) calc(100vw - 3rem), (max-width: 1100px) 46vw, 34rem"
+                alt="Kottu Saikumar's resume"
+                width="1000"
+                height="1415"
+                fetchPriority="high"
+                decoding="sync"
+              />
+              <figcaption>Curriculum Vitae / Source 01</figcaption>
+            </figure>
+            <div className="resume-reduced-summary">
+              <h3>Research. Build. Deploy.</h3>
+              <p>AI systems built for real problems</p>
+              <a href={personal.resume} target="_blank" rel="noreferrer">
+                Read resume <span aria-hidden="true">↗</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+    )
+  }
 
   return (
     <section ref={sectionRef} className={`resume-story${reducedMotion ? ' reduced' : ''}`} aria-labelledby="resume-story-title">

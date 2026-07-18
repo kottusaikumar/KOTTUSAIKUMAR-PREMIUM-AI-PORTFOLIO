@@ -152,12 +152,21 @@ h2 { margin-bottom: 0; font-size: clamp(3.3rem, 7.2vw, 8.5rem); }
 .resume-story-footer i { position: relative; height: 1px; overflow: hidden; background: rgb(255 255 255 / 22%); }
 .resume-story-footer i span { position: absolute; inset: 0; background: var(--mint-light); transform: scaleX(0); transform-origin: left; will-change: transform; }
 .resume-story-footer b { font: inherit; color: var(--mint-light); }
-.resume-story.reduced { height: auto; min-height: 100svh; }
-.resume-story.reduced .resume-story-sticky { position: relative; }
-.resume-story.reduced .resume-story-header, .resume-story.reduced .resume-paper-stage { display: none; }
-.resume-story.reduced .resume-story-message, .resume-story.reduced .resume-message-line > span, .resume-story.reduced .resume-message-note, .resume-story.reduced .resume-tech-mark { opacity: 1 !important; transform: none !important; }
-.resume-story.reduced .resume-paper-ball { opacity: 1 !important; transform: translate(27vw, 30vh) rotate(38deg) scale(.82) !important; }
-.resume-story.reduced .resume-ball-shadow { opacity: .3 !important; transform: translate(27vw, 35vh) scale(1, .4) !important; }
+.resume-story.reduced { height: auto; min-height: 0; padding: clamp(5.5rem, 9vw, 8rem) var(--gutter); overflow: hidden; color: var(--white); background-color: #b98d5e; background-image: repeating-linear-gradient(97deg, rgb(255 255 255 / 5%) 0 2px, transparent 2px 19px), repeating-linear-gradient(6deg, #bd9161 0 8px, #b78a59 8px 17px, #c19869 17px 28px); }
+.resume-reduced-shell { position: relative; width: min(100%, 76rem); padding: clamp(1.25rem, 3vw, 2.5rem); margin-inline: auto; overflow: hidden; border: 1px solid rgb(208 246 222 / 28%); border-radius: 1.25rem; background-color: #11724a; background-image: linear-gradient(rgb(191 238 207 / 18%) 1px, transparent 1px), linear-gradient(90deg, rgb(191 238 207 / 18%) 1px, transparent 1px), linear-gradient(135deg, rgb(255 255 255 / 5%), transparent 52%); background-size: 3.4rem 3.4rem, 3.4rem 3.4rem, 100% 100%; box-shadow: 0 18px 40px rgb(38 24 12 / 30%), inset 0 0 0 .65rem rgb(5 72 45 / 42%); }
+.resume-reduced-header { position: relative; z-index: 1; max-width: 34rem; margin-bottom: clamp(2rem, 5vw, 4rem); }
+.resume-reduced-header p { margin-bottom: .65rem; color: var(--mint-light); font-size: .65rem; font-weight: 750; letter-spacing: .16em; }
+.resume-reduced-header h2 { font-size: clamp(2.6rem, 5vw, 5.4rem); line-height: .92; }
+.resume-reduced-header h2 em { color: var(--mint-light); }
+.resume-reduced-layout { position: relative; z-index: 1; display: grid; grid-template-columns: minmax(16rem, .8fr) minmax(18rem, 1.2fr); gap: clamp(2rem, 6vw, 6rem); align-items: center; }
+.resume-reduced-document { width: min(100%, 32rem); margin: 0; justify-self: center; }
+.resume-reduced-document img { display: block; width: 100%; height: auto; border-radius: .35rem; filter: drop-shadow(0 24px 32px rgb(0 0 0 / 30%)); }
+.resume-reduced-document figcaption { margin-top: .85rem; color: rgb(255 255 255 / 72%); font-size: .58rem; font-weight: 750; letter-spacing: .15em; text-align: center; text-transform: uppercase; }
+.resume-reduced-summary { max-width: 35rem; }
+.resume-reduced-summary h3 { max-width: 9ch; margin: 0; color: var(--paper); font-family: var(--serif); font-size: clamp(3.2rem, 6.8vw, 7rem); font-weight: 400; line-height: .82; letter-spacing: -.055em; }
+.resume-reduced-summary p { margin: 1.5rem 0 2rem; color: var(--mint-light); font-family: var(--script); font-size: clamp(1.35rem, 2.5vw, 2.2rem); line-height: 1.15; }
+.resume-reduced-summary a { display: inline-flex; align-items: center; gap: .45rem; min-height: 3.25rem; padding: .75rem 1.15rem; color: var(--green-deep); background: var(--paper); border: 1px solid rgb(255 255 255 / 70%); border-radius: 999px; font-size: .9rem; font-weight: 750; text-decoration: none; }
+.resume-reduced-summary a:focus-visible { outline: 3px solid var(--mint-light); outline-offset: 4px; }
 
 /* Hero */
 .hero { position: relative; min-height: 100svh; display: grid; grid-template-columns: minmax(0, 1.08fr) minmax(340px, .92fr); overflow: hidden; background: var(--green-deep); isolation: isolate; }
@@ -749,6 +758,9 @@ h2 { margin-bottom: 0; font-size: clamp(3.3rem, 7.2vw, 8.5rem); }
 
 @media (max-width: 860px) {
   .mobile-project { grid-template-columns: 1fr; }
+  .resume-reduced-layout { grid-template-columns: 1fr; }
+  .resume-reduced-summary { max-width: 38rem; justify-self: center; text-align: center; }
+  .resume-reduced-summary h3 { max-width: 10ch; }
 }
 
 @media (max-width: 900px) {
@@ -780,6 +792,13 @@ h2 { margin-bottom: 0; font-size: clamp(3.3rem, 7.2vw, 8.5rem); }
   h2 { font-size: clamp(3.2rem, 15vw, 5.4rem); }
   .portal-wordmark, .portal-outline-wordmark { font-size: clamp(3.7rem, 16.5vw, 7rem); }
   .resume-story { height: 620svh; }
+  .resume-story.reduced { height: auto; padding: 4.5rem 1rem 5.5rem; }
+  .resume-reduced-shell { padding: 1.25rem; border-radius: 1rem; }
+  .resume-reduced-header { margin-bottom: 2rem; }
+  .resume-reduced-header h2 { font-size: clamp(2.5rem, 12vw, 4rem); }
+  .resume-reduced-layout { gap: 2.5rem; }
+  .resume-reduced-document { width: min(100%, 27rem); }
+  .resume-reduced-summary h3 { font-size: clamp(3.25rem, 15vw, 5.2rem); }
   .resume-cutting-mat { inset: 2% 3%; }
   .resume-story-header { left: var(--gutter); }
   .resume-story-header { max-width: 76vw; }
