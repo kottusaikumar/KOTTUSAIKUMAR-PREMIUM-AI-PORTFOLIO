@@ -55,6 +55,9 @@ const experienceChapters = [
 
 export function ExperienceTimeline() {
   const primaryExperience = experience[0]
+  const orderedExperience = experience
+    .map((entry, index) => ({ entry, chapter: experienceChapters[index] }))
+    .sort((a, b) => a.chapter.number.localeCompare(b.chapter.number))
   const sectionRef = useRef<HTMLElement>(null)
   const stageRef = useRef<HTMLDivElement>(null)
   const sequenceRef = useRef<HTMLDivElement>(null)
@@ -147,8 +150,7 @@ export function ExperienceTimeline() {
 
             <div ref={sequenceRef} className="experience-sequence">
               <div className="experience-sequence-panel experience-project-frame">
-                {experience.map((entry, index) => {
-                  const chapter = experienceChapters[index]
+                {orderedExperience.map(({ entry, chapter }) => {
                   return (
                   <article className="experience-project experience-project-slide" key={entry.period}>
                     <div className="experience-project-marker" aria-hidden="true"><span>{chapter.number}</span></div>
@@ -195,9 +197,9 @@ export function ExperienceTimeline() {
             </div>
 
             <div className="experience-sequence-progress" aria-hidden="true">
-              {['Project 1', 'Project 2'].map((label, index) => (
-                <span className={`experience-sequence-step${index === 0 ? ' active' : ''}`} key={label}>
-                  <i />{label}
+              {orderedExperience.map(({ chapter }, index) => (
+                <span className={`experience-sequence-step${index === 0 ? ' active' : ''}`} key={chapter.number}>
+                  <i />Project {chapter.number}
                 </span>
               ))}
             </div>
