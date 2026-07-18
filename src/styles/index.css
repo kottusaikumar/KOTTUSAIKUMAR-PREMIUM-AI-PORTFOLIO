@@ -438,6 +438,15 @@ h2 { margin-bottom: 0; font-size: clamp(3.3rem, 7.2vw, 8.5rem); }
 .book-overlay-compact .project-links a { font-size: .68rem; }
 .book-overlay-compact .project-media-label { top: .8rem; right: .9rem; left: .9rem; font-size: .45rem; }
 .book-overlay-compact .page-scroll-rail { display: none; }
+.book-overlay-1 .project-detail-groups,
+.book-overlay-2 .project-detail-groups,
+.book-overlay-3 .project-detail-groups { grid-template-columns: minmax(0, 1fr); gap: .35rem; }
+.book-overlay-1 .project-detail-group ul,
+.book-overlay-2 .project-detail-group ul,
+.book-overlay-3 .project-detail-group ul { align-content: space-evenly; }
+.book-overlay-1 .project-detail-group li,
+.book-overlay-2 .project-detail-group li,
+.book-overlay-3 .project-detail-group li { font-size: .64rem; line-height: 1.24; }
 
 @media (min-width: 981px) and (max-width: 1150px) {
   .book-right-page h3 { font-size: clamp(1.45rem, 2.2vw, 2rem); }
