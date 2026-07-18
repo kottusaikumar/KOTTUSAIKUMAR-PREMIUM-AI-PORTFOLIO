@@ -1,0 +1,888 @@
+{
+  "schema_version": "1.0.0",
+  "document_version": "July 2026 - Final Confirmed",
+  "language": "en",
+  "candidate": {
+    "full_name": "Kottu Saikumar",
+    "professional_title": "Full-Stack AI Developer",
+    "location": "Hyderabad, India",
+    "email": "kottusaikumar2003@gmail.com",
+    "phone": "+91 6304830339",
+    "public_links": {
+      "github": "https://github.com/kottusaikumar",
+      "github_repositories": "https://github.com/kottusaikumar?tab=repositories",
+      "linkedin": "https://www.linkedin.com/in/kottu-saikumar-10541b269",
+      "leetcode": "https://leetcode.com/u/kottusaikumar/",
+      "portfolio": "https://kottusaikumar-portfolio.vercel.app/"
+    },
+    "portfolio_positioning": "Engineering intelligence into usable systems.",
+    "supporting_line": "AI products, data systems, and interfaces - built end to end.",
+    "professional_summary": [
+      "I am a Full-Stack AI Developer with a foundation in Python, machine learning, AI engineering, data science, and frontend development.",
+      "I build end-to-end applications that combine data or model pipelines with practical APIs and clean user interfaces.",
+      "My work spans NLP ranking, hybrid retrieval-augmented generation, computer vision, deep-learning chatbots, predictive modeling, analytics dashboards, FastAPI and Flask backends, and React interfaces.",
+      "I completed a B.Tech in Electronics and Communication Engineering and have approximately six months of Data Science internship experience at Vajra.ai."
+    ]
+  },
+  "career_preferences": {
+    "preferred_role_order": [
+      "AI/ML Engineer",
+      "Data Scientist",
+      "Machine Learning Engineer",
+      "Data Analyst",
+      "Software Engineer"
+    ],
+    "opportunity_types": [
+      "Internship",
+      "Full-time"
+    ],
+    "availability": "Immediate joiner",
+    "notice_period": "None reported",
+    "relocation": "Open to relocation and opportunities in any location",
+    "compensation": "Flexible and negotiable based on market standards, role, and learning opportunity",
+    "priority": "Hands-on experience, deeper technical exposure, new technologies, and continued growth",
+    "experience_level": "Fresher for full-time roles with approximately six months of internship experience"
+  },
+  "education": [
+    {
+      "qualification": "B.Tech in Electronics and Communication Engineering",
+      "institution": "University College of Engineering, Kakinada (JNTUK)",
+      "period": "2020-2024",
+      "grade": "7.2/10 CGPA",
+      "location": "Kakinada, India",
+      "status": "confirmed"
+    },
+    {
+      "qualification": "Intermediate (MPC)",
+      "institution": "Narayana Junior College",
+      "period": "2018-2020",
+      "grade": "9.3/10 CGPA",
+      "status": "confirmed"
+    },
+    {
+      "qualification": "SSC",
+      "institution": "Gowthama English Medium High School",
+      "period": "Completed 2018",
+      "grade": "9.3/10 CGPA",
+      "status": "needs_confirmation",
+      "public_answer_policy": "Do not state this entry unless reconfirmed by the candidate."
+    }
+  ],
+  "experience": [
+    {
+      "organization": "Vajra.ai",
+      "role": "Data Science Intern",
+      "period": "November 2024-February 2025",
+      "project": "Intelligent Food Spoilage Detector and AI Chatbot",
+      "responsibilities": [
+        "Developed a full-stack AI chatbot combining computer vision and NLP.",
+        "Built a React frontend and Flask REST API for image classification and conversational AI.",
+        "Applied transfer learning, data augmentation, and fine-tuning to a custom food-image dataset."
+      ],
+      "technologies": [
+        "VGG19",
+        "CNN",
+        "LSTM",
+        "TensorFlow",
+        "Keras",
+        "React",
+        "Flask",
+        "REST API",
+        "OpenCV"
+      ],
+      "verified_metrics": {
+        "classification_accuracy": "94%",
+        "food_images": "5,000+",
+        "question_answer_pairs": "1,000+ curated pairs"
+      },
+      "status": "confirmed"
+    },
+    {
+      "organization": "Vajra.ai",
+      "role": "Data Science Intern",
+      "period": "August 2024-October 2024",
+      "project": "Drug Effectiveness Prediction",
+      "responsibilities": [
+        "Built an end-to-end machine-learning pipeline to predict drug effectiveness.",
+        "Handled missing values, outliers, categorical variables, feature scaling, feature engineering, and cross-validation.",
+        "Compared Linear Regression, Ridge, Lasso, XGBoost, and Random Forest.",
+        "Contributed to validation reports and SOP documentation."
+      ],
+      "technologies": [
+        "Python",
+        "Pandas",
+        "NumPy",
+        "Scikit-learn",
+        "XGBoost",
+        "Random Forest",
+        "GridSearchCV"
+      ],
+      "verified_metrics": {
+        "patient_records": "10,000+",
+        "r_squared": 0.81,
+        "rmse": 0.38
+      },
+      "status": "confirmed",
+      "date_note": "LinkedIn reportedly lists January-February 2025 for the project. Avoid stating project dates unless the candidate confirms the intended timeline."
+    }
+  ],
+  "skills": {
+    "programming_and_web": [
+      "Python",
+      "C++",
+      "JavaScript",
+      "TypeScript",
+      "React.js",
+      "HTML5",
+      "CSS3",
+      "Object-Oriented Programming"
+    ],
+    "ai_and_machine_learning": [
+      "Machine Learning",
+      "Deep Learning",
+      "Artificial Intelligence",
+      "NLP",
+      "TensorFlow",
+      "Keras",
+      "Scikit-learn",
+      "OpenCV",
+      "Model tuning",
+      "Cross-validation",
+      "GridSearchCV"
+    ],
+    "data_and_analytics": [
+      "Pandas",
+      "NumPy",
+      "SQL",
+      "MySQL",
+      "SQLite",
+      "Data cleaning",
+      "EDA",
+      "Statistics",
+      "Data visualization",
+      "Data mining",
+      "Matplotlib",
+      "Seaborn",
+      "Tableau",
+      "Power BI",
+      "Advanced Excel"
+    ],
+    "backend_and_apis": [
+      "FastAPI",
+      "Flask",
+      "REST APIs",
+      "Uvicorn"
+    ],
+    "retrieval_and_language_systems": [
+      "RAG",
+      "LangChain",
+      "FAISS",
+      "BM25",
+      "Sentence Transformers",
+      "CrossEncoder",
+      "TF-IDF",
+      "Cosine similarity",
+      "Fuzzy matching",
+      "Reciprocal Rank Fusion",
+      "Reranking"
+    ],
+    "tools_and_delivery": [
+      "Git",
+      "GitHub",
+      "Docker",
+      "VS Code",
+      "PyCharm",
+      "Google Colab",
+      "Vite",
+      "Tailwind CSS",
+      "Streamlit",
+      "Plotly",
+      "ReportLab"
+    ],
+    "soft_skills": [
+      "Communication",
+      "Problem solving",
+      "Fast learning",
+      "Adaptability",
+      "Data storytelling",
+      "Data strategy",
+      "Data pipeline development"
+    ]
+  },
+  "certifications": [
+    {
+      "name": "Data Science with AI Internship",
+      "issuer": "Vajra.ai",
+      "status": "confirmed"
+    },
+    {
+      "name": "Getting Started with Data",
+      "issuer": "IBM",
+      "issued": "May 2025",
+      "status": "confirmed_public_listing"
+    },
+    {
+      "name": "Data Science BootCamp - From Analyzing Data to Creating ML Models",
+      "issuer": "GeeksforGeeks",
+      "issued": "2025",
+      "status": "confirmed"
+    }
+  ],
+  "projects": [
+    {
+      "id": "ai_resume_screening_system",
+      "name": "AI Resume Screening System",
+      "focus": "NLP ranking and semantic candidate matching",
+      "summary": "A recruiter-focused screening engine that compares resumes with job descriptions and produces alignment scores, skill gaps, recommendations, seniority analysis, and reports.",
+      "technologies": [
+        "React",
+        "TypeScript",
+        "Vite",
+        "Tailwind CSS",
+        "TanStack Router",
+        "FastAPI",
+        "Uvicorn",
+        "PDF parsing",
+        "DOCX parsing",
+        "spaCy",
+        "Sentence Transformers",
+        "TF-IDF",
+        "BM25",
+        "Cosine similarity",
+        "N-grams",
+        "Fuzzy matching",
+        "Synonym mapping",
+        "Skill taxonomy",
+        "ReportLab"
+      ],
+      "features": [
+        "Combines semantic similarity, BM25 overlap, TF-IDF similarity, and skill-keyword coverage with configurable weights.",
+        "Returns matched skills, missing skills, mandatory gaps, recommendations, seniority, resume quality, and an alignment summary.",
+        "Includes scan history, a searchable skills database, aggregate analytics, CSV export, and PDF reports.",
+        "Includes optional API-key authentication, CORS allow-lists, rate limits, upload limits, and health checks."
+      ],
+      "github": "https://github.com/kottusaikumar/AI-Resume-Screening-System",
+      "status": "confirmed"
+    },
+    {
+      "id": "hybrid_rag_document_assistant",
+      "name": "Hybrid RAG Document Assistant - Production Chatbot",
+      "focus": "Hybrid semantic and keyword retrieval with local answer generation",
+      "summary": "A production-oriented PDF question-answering assistant using dense retrieval, sparse retrieval, fusion, reranking, citations, caching, streaming, and a local Ollama model with zero external LLM API calls.",
+      "technologies": [
+        "Python",
+        "FastAPI",
+        "FAISS HNSW",
+        "BM25",
+        "Hugging Face embeddings",
+        "Sentence Transformers",
+        "CrossEncoder",
+        "Ollama",
+        "NDJSON streaming",
+        "SQLite"
+      ],
+      "features": [
+        "Scrubs common PII and uses hierarchical child-parent chunking.",
+        "Fuses dense and BM25 results with Reciprocal Rank Fusion and reranks with a CrossEncoder.",
+        "Streams status, citations, answer tokens, confidence, faithfulness, and relevance metadata.",
+        "Uses exact and semantic caches, session memory, topic-shift detection, citation excerpts, deduplication, grounding warnings, and live PDF reindexing.",
+        "Uses a local Ollama model, avoiding external LLM API dependency."
+      ],
+      "verified_metric": "Dual-layer caching reduced repeated-query latency from approximately 20 seconds to under 50 milliseconds.",
+      "github": "https://github.com/kottusaikumar/Hybrid-RAG-Document-Assistant-Production-Chatbot-",
+      "status": "confirmed"
+    },
+    {
+      "id": "food_spoilage_detection_chatbot",
+      "name": "AI Chatbot Project - Intelligent Food Spoilage Detector",
+      "focus": "Computer vision and NLP customer-service assistant",
+      "summary": "A dual-model application combining VGG19-based fresh-versus-spoiled image classification with an attention-based encoder-decoder LSTM chatbot for customer questions and refund recommendations.",
+      "technologies": [
+        "VGG19",
+        "CNN",
+        "TensorFlow",
+        "Keras",
+        "Encoder-decoder LSTM",
+        "Attention",
+        "React",
+        "Flask",
+        "OpenCV"
+      ],
+      "architecture": {
+        "cnn": "VGG19 with custom layers, 224x224 RGB input, and binary fresh/spoiled output.",
+        "nlp": "Encoder-decoder LSTM with attention, tokenization, sequence generation, and teacher forcing.",
+        "api_routes": [
+          "/api/chat",
+          "/api/classify",
+          "/api/health"
+        ],
+        "frontend": "React chat interface with image preview, loading states, validation, responsive design, and error handling."
+      },
+      "features": [
+        "Uses image classification results to guide customer-facing analysis and automated refund recommendations.",
+        "Supports chat, image upload and preview, separate chat and classification routes, responsive states, validation, and health reporting."
+      ],
+      "verified_metrics": {
+        "classification_accuracy": "94%",
+        "food_images": "5,000+",
+        "question_answer_pairs": "1,000+ curated pairs"
+      },
+      "github": "https://github.com/kottusaikumar/AI-Chatbot-Project-Intelligent-Food-Spoilage-Detector-CNN-NLP-",
+      "status": "confirmed"
+    },
+    {
+      "id": "weapon_detection_identification",
+      "name": "Weapon Detection and Identification Using Image Recognition",
+      "focus": "Computer vision classifier comparison",
+      "summary": "A Streamlit application that classifies uploaded weapon images using both a pretrained VGG19 model and a custom CNN and displays their predictions side by side.",
+      "technologies": [
+        "TensorFlow",
+        "Keras",
+        "VGG19",
+        "Custom CNN",
+        "Streamlit",
+        "Image preprocessing",
+        "Bing Image Downloader"
+      ],
+      "features": [
+        "Uses 224x224 input for VGG19 and 64x64 input for the custom CNN.",
+        "Supports nine weapon categories and PNG, JPG, and JPEG uploads.",
+        "Downloads missing model artifacts from configured Google Drive IDs.",
+        "Converts grayscale inputs to RGB and surfaces preprocessing errors in the interface."
+      ],
+      "limitations": [
+        "Do not describe it as real-time video detection or bounding-box object detection; the verified application is uploaded-image classification and identification."
+      ],
+      "public_project_period": "March 2025-April 2025",
+      "github": "https://github.com/kottusaikumar/weapons-Detection-identification-using-Image-Recognition",
+      "status": "confirmed"
+    },
+    {
+      "id": "tradepro_trading_dashboard",
+      "name": "TradePro Trading Dashboard",
+      "focus": "Trading analytics and interactive charting",
+      "summary": "A full-stack analytics dashboard that transforms local market datasets into interactive OHLC and indicator charts.",
+      "technologies": [
+        "Flask",
+        "React",
+        "Vite",
+        "Tailwind CSS",
+        "Plotly",
+        "Pandas",
+        "CSV",
+        "RAR data",
+        "Excel configuration"
+      ],
+      "features": [
+        "Uses local CSV and RAR sources rather than an external live-market API.",
+        "Uses Charts_dataset.xlsx to configure variable mapping, visibility, pane numbers, and source files.",
+        "Supports candlestick, line, area, and scatter charts across synchronized panes.",
+        "Calculates VWAP, EMA(20), and RSI(14).",
+        "Includes dark and light themes and dynamic feature loading."
+      ],
+      "limitations": [
+        "A temporary loca.lt demo in the repository requires a local server and must not be presented as a permanent live deployment."
+      ],
+      "github": "https://github.com/kottusaikumar/Tradepro-Trading-Dashboard",
+      "status": "confirmed"
+    },
+    {
+      "id": "instagram_engagement_analysis",
+      "name": "Instagram User Engagement and Content Performance Analysis",
+      "focus": "Exploratory data analysis, social-media analytics, dashboarding, and data storytelling",
+      "summary": "An analysis of Instagram content performance, impression sources, reach, follower growth, engagement, post timing, and content types using Python and BI dashboards.",
+      "technologies": [
+        "Python",
+        "Pandas",
+        "NumPy",
+        "Matplotlib",
+        "Seaborn",
+        "Statistical analysis",
+        "Tableau",
+        "Power BI"
+      ],
+      "features": [
+        "Analyzed impression sources including Home, Hashtags, Explore, and Other.",
+        "Tracked follower growth, engagement rates, reach, impressions, post timing, and content performance.",
+        "Built interactive dashboards and used correlation analysis and hypothesis testing."
+      ],
+      "verified_metrics": {
+        "posts_analyzed": "1,000+",
+        "reported_engagement_improvement": "20%"
+      },
+      "metric_note": "Treat the 20% value as a project finding, not as a guaranteed business outcome.",
+      "public_project_period": "November 2024-December 2024",
+      "github": "https://github.com/kottusaikumar/Unveiling-Patterns-Instagram-Data-Exploration",
+      "status": "confirmed"
+    },
+    {
+      "id": "drug_effectiveness_predictor",
+      "name": "Drug Effectiveness Predictor Using Machine Learning",
+      "focus": "Supervised regression for drug-effectiveness prediction",
+      "summary": "An end-to-end tabular machine-learning workflow that predicts drug effectiveness using cleaned and engineered patient data and compares multiple regression algorithms.",
+      "technologies": [
+        "Python",
+        "Pandas",
+        "NumPy",
+        "Scikit-learn",
+        "XGBoost",
+        "Random Forest",
+        "Linear Regression",
+        "Ridge",
+        "Lasso",
+        "GridSearchCV",
+        "Label encoding",
+        "Cross-validation"
+      ],
+      "features": [
+        "Processed 10,000+ drug-review records.",
+        "Handled missing values, outliers, categorical variables, feature scaling, and feature engineering.",
+        "Compared multiple regression algorithms and tuned hyperparameters.",
+        "Contributed to validation reports and SOP documentation."
+      ],
+      "verified_metrics": {
+        "r_squared": 0.81,
+        "rmse": 0.38,
+        "patient_records": "10,000+",
+        "best_model": "Random Forest"
+      },
+      "github": "https://github.com/kottusaikumar/Drug-Effectiveness-predictor-Using-Machine-Learning",
+      "status": "confirmed",
+      "date_policy": "Do not state exact project dates until the candidate resolves the resume and LinkedIn date difference."
+    },
+    {
+      "id": "ocr_multilingual_audio",
+      "name": "Optical Text Recognition and Multilingual Audio Output",
+      "focus": "Camera-based OCR, translation, and text-to-speech accessibility",
+      "summary": "A project that captures text from an IP-webcamera stream, extracts text using OCR, translates it into a requested language, and produces audio output.",
+      "technologies": [
+        "Python",
+        "Tesseract OCR",
+        "googletrans",
+        "gTTS",
+        "HTML",
+        "CSS"
+      ],
+      "public_project_period": "November 2023-May 2024",
+      "github": null,
+      "limitations": [
+        "Do not invent accuracy, dataset size, deployment status, or additional architecture details."
+      ],
+      "status": "confirmed_public_listing"
+    }
+  ],
+  "verified_metrics": {
+    "internship_experience": "Approximately six months across August 2024-February 2025",
+    "food_spoilage_accuracy": "94%",
+    "food_images": "5,000+",
+    "food_chatbot_qa_pairs": "1,000+ curated pairs",
+    "drug_prediction_r_squared": 0.81,
+    "drug_prediction_rmse": 0.38,
+    "drug_patient_records": "10,000+",
+    "instagram_posts": "1,000+",
+    "instagram_reported_engagement_improvement": "20%"
+  },
+  "faq": [
+    {
+      "id": "tell_me_about_yourself",
+      "question_patterns": [
+        "tell me about yourself",
+        "introduce yourself",
+        "who are you",
+        "about you"
+      ],
+      "answer": "I am Kottu Saikumar, a Full-Stack AI Developer with a B.Tech in Electronics and Communication Engineering and approximately six months of Data Science internship experience at Vajra.ai. My work covers machine learning, deep learning, NLP, RAG, computer vision, analytics, FastAPI and Flask backends, and React interfaces. I enjoy building complete, usable systems from data and model logic through deployment-ready user experiences."
+    },
+    {
+      "id": "preferred_roles",
+      "question_patterns": [
+        "what roles are you looking for",
+        "preferred role",
+        "job role",
+        "career preference"
+      ],
+      "answer": "My first preference is an AI/ML Engineer role. I am also interested in Data Scientist, Machine Learning Engineer, Data Analyst, and suitable Software Engineering opportunities where I can apply and deepen my technical skills."
+    },
+    {
+      "id": "availability",
+      "question_patterns": [
+        "are you available",
+        "when can you join",
+        "notice period",
+        "immediate joiner"
+      ],
+      "answer": "Yes. I am available to join immediately and I have no reported notice period."
+    },
+    {
+      "id": "relocation",
+      "question_patterns": [
+        "are you willing to relocate",
+        "relocation",
+        "location preference",
+        "can you move"
+      ],
+      "answer": "Yes. I am open to relocation and opportunities in any location."
+    },
+    {
+      "id": "salary",
+      "question_patterns": [
+        "expected salary",
+        "salary expectation",
+        "ctc",
+        "stipend",
+        "compensation"
+      ],
+      "answer": "I am flexible and open to compensation based on the role, market standards, and the overall learning opportunity. My main priority is gaining deeper hands-on experience and contributing effectively."
+    },
+    {
+      "id": "experience",
+      "question_patterns": [
+        "how much experience",
+        "work experience",
+        "internship experience",
+        "months of experience"
+      ],
+      "answer": "I have approximately six months of Data Science internship experience at Vajra.ai, completed across two internship periods from August 2024 to February 2025. For full-time roles, I am a fresher."
+    },
+    {
+      "id": "strongest_areas",
+      "question_patterns": [
+        "strongest skills",
+        "strongest areas",
+        "what are you good at",
+        "core strengths"
+      ],
+      "answer": "My strongest areas are Python, machine-learning workflows, NLP and retrieval systems, computer vision, data analysis, FastAPI and Flask APIs, and integrating AI logic with React-based interfaces."
+    },
+    {
+      "id": "flask",
+      "question_patterns": [
+        "do you know flask",
+        "flask experience",
+        "can you use flask"
+      ],
+      "answer": "Yes. I have used Flask to build REST APIs and full-stack applications, including the Food Spoilage Detection Chatbot and TradePro Trading Dashboard."
+    },
+    {
+      "id": "fastapi",
+      "question_patterns": [
+        "do you know fastapi",
+        "fastapi experience",
+        "can you use fastapi"
+      ],
+      "answer": "Yes. I have used FastAPI for production-oriented applications including the AI Resume Screening System and Hybrid RAG Document Assistant."
+    },
+    {
+      "id": "unknown_skill",
+      "question_patterns": [
+        "do you know {skill}",
+        "experience with {skill}",
+        "can you work with {skill}"
+      ],
+      "answer_template": "I do not yet have direct hands-on experience with {skill} recorded in my verified profile, but I am a fast learner and can adapt quickly. I have repeatedly learned new tools while building end-to-end projects and would be comfortable developing the required skills."
+    },
+    {
+      "id": "why_hire",
+      "question_patterns": [
+        "why should we hire you",
+        "why hire you",
+        "what makes you suitable"
+      ],
+      "answer": "I bring a combination of AI/ML fundamentals, practical project execution, backend API development, and frontend integration. I can work across the complete application flow, I learn quickly, and I am motivated to gain deeper experience while contributing to real product work."
+    },
+    {
+      "id": "learning_goals",
+      "question_patterns": [
+        "learning goals",
+        "what do you want to learn",
+        "career goals"
+      ],
+      "answer": "I want to deepen my practical understanding of AI/ML systems, learn more production technologies, work with real-world data and deployment constraints, and gain broader hands-on experience in full-time engineering environments."
+    },
+    {
+      "id": "project_nlp",
+      "question_patterns": [
+        "best nlp project",
+        "ranking project",
+        "resume screening project"
+      ],
+      "answer": "The AI Resume Screening System best demonstrates my NLP and ranking work. It combines TF-IDF, BM25, sentence-level semantic similarity, n-grams, fuzzy matching, synonym mapping, and skill coverage to compare resumes with job descriptions."
+    },
+    {
+      "id": "project_rag",
+      "question_patterns": [
+        "best rag project",
+        "rag experience",
+        "document assistant"
+      ],
+      "answer": "The Hybrid RAG Document Assistant best demonstrates my RAG work. It combines FAISS-based dense retrieval with BM25, Reciprocal Rank Fusion, CrossEncoder reranking, grounded citations, caching, streaming, and a local Ollama model."
+    },
+    {
+      "id": "project_cv",
+      "question_patterns": [
+        "computer vision projects",
+        "best computer vision project",
+        "image recognition"
+      ],
+      "answer": "My main computer-vision projects are the Food Spoilage Detection Chatbot and the Weapon Detection and Identification System. The food project combines VGG19 classification with an NLP chatbot, while the weapon project compares VGG19 and a custom CNN across nine image categories."
+    },
+    {
+      "id": "project_fullstack",
+      "question_patterns": [
+        "full stack projects",
+        "frontend and backend projects",
+        "end to end projects"
+      ],
+      "answer": "The AI Resume Screening System, Food Spoilage Detection Chatbot, Hybrid RAG Document Assistant, and TradePro Trading Dashboard all combine a frontend experience with a Python backend and data or model logic."
+    },
+    {
+      "id": "project_analytics",
+      "question_patterns": [
+        "analytics projects",
+        "dashboard projects",
+        "data analysis projects"
+      ],
+      "answer": "My analytics work includes the TradePro Trading Dashboard and Instagram User Engagement Analysis. TradePro processes local market datasets and renders OHLC charts with VWAP, EMA, RSI, and configurable panes, while the Instagram project analyzes engagement, reach, impressions, timing, and content performance using Python, Tableau, and Power BI."
+    },
+    {
+      "id": "leetcode",
+      "question_patterns": [
+        "leetcode",
+        "coding profile",
+        "leetcode profile"
+      ],
+      "answer": "Yes. My LeetCode profile is https://leetcode.com/u/kottusaikumar/. My verified knowledge base does not currently include a confirmed solved-problem count or ranking."
+    },
+    {
+      "id": "certifications",
+      "question_patterns": [
+        "certifications",
+        "certificates",
+        "courses completed"
+      ],
+      "answer": "I have completed the Data Science with AI Internship certification from Vajra.ai, the Data Science BootCamp from GeeksforGeeks, and Getting Started with Data from IBM, issued in May 2025."
+    },
+    {
+      "id": "ocr",
+      "question_patterns": [
+        "ocr project",
+        "text recognition",
+        "tesseract",
+        "text to speech project"
+      ],
+      "answer": "Yes. I built an optical text recognition project that captured text from an IP-webcamera stream, extracted it with Tesseract OCR, translated it using googletrans, and generated audio using gTTS."
+    },
+    {
+      "id": "power_bi",
+      "question_patterns": [
+        "power bi",
+        "do you know power bi",
+        "business intelligence"
+      ],
+      "answer": "Yes. I used Power BI and Tableau for the Instagram User Engagement and Content Performance Analysis project, along with Python-based exploratory and statistical analysis."
+    },
+    {
+      "id": "current_employer",
+      "question_patterns": [
+        "current company",
+        "currently employed",
+        "socialtek",
+        "current job"
+      ],
+      "answer": "My public LinkedIn profile shows SocialTek AI & ML Business Solutions Pvt Ltd in the experience section, but the exact role and dates are not included in this verified knowledge base. Please contact me directly for my latest employment status."
+    }
+  ],
+  "behavioral_answers": [
+    {
+      "question": "How do you approach a new project?",
+      "answer": "I first understand the problem, collect references, map user flows, and define the direction. Then I build the data or model pipeline and reusable APIs, develop the user interface, test the full flow, document it, optimize performance, and prepare it for deployment."
+    },
+    {
+      "question": "How do you handle unfamiliar problems?",
+      "answer": "I break the problem into smaller parts, study the required concepts, test a minimal solution, and improve it iteratively. I am comfortable learning new tools when a project requires them."
+    },
+    {
+      "question": "How do you validate model quality?",
+      "answer": "I use appropriate metrics, compare multiple algorithms when relevant, apply cross-validation, inspect errors, and verify that the output supports the actual product workflow rather than relying on a single metric."
+    },
+    {
+      "question": "How do you combine AI and frontend work?",
+      "answer": "I expose model or data logic through clean APIs, then design a frontend that makes outputs understandable through clear status, validation, visual feedback, and error handling."
+    }
+  ],
+  "intent_mapping": {
+    "identity": [
+      "name",
+      "who are you",
+      "introduce yourself",
+      "about you",
+      "profile"
+    ],
+    "contact": [
+      "email",
+      "phone",
+      "contact",
+      "linkedin",
+      "github",
+      "portfolio",
+      "leetcode"
+    ],
+    "education": [
+      "education",
+      "degree",
+      "college",
+      "university",
+      "cgpa",
+      "graduation",
+      "school"
+    ],
+    "experience": [
+      "experience",
+      "internship",
+      "vajra",
+      "worked",
+      "months",
+      "company"
+    ],
+    "skills": [
+      "skills",
+      "technologies",
+      "python",
+      "flask",
+      "fastapi",
+      "react",
+      "machine learning",
+      "power bi"
+    ],
+    "projects": [
+      "projects",
+      "built",
+      "work",
+      "portfolio project",
+      "rag",
+      "computer vision",
+      "analytics",
+      "ocr"
+    ],
+    "availability": [
+      "join",
+      "notice period",
+      "available",
+      "immediate"
+    ],
+    "location": [
+      "location",
+      "relocate",
+      "hyderabad",
+      "move"
+    ],
+    "salary": [
+      "salary",
+      "ctc",
+      "compensation",
+      "stipend"
+    ],
+    "unknown_skill": [
+      "do you know",
+      "experience with",
+      "can you work with"
+    ],
+    "private_irrelevant": [
+      "father",
+      "mother",
+      "wife",
+      "family phone",
+      "password",
+      "bank",
+      "aadhaar",
+      "relationship",
+      "financial account"
+    ]
+  },
+  "chatbot_rules": {
+    "voice": "first_person",
+    "style": [
+      "professional",
+      "confident",
+      "simple English",
+      "concise by default"
+    ],
+    "default_answer_length": "2-5 sentences",
+    "expand_when": "The visitor explicitly asks for technical depth",
+    "grounding": [
+      "Answer only from this JSON knowledge base.",
+      "Never invent facts, dates, metrics, employers, responsibilities, links, grades, salaries, or personal details.",
+      "Map spelling errors, paraphrases, and name variations to the closest known intent using fuzzy matching.",
+      "When asked broad questions, provide a short summary and include the most relevant project example.",
+      "When asked for technical depth, explain architecture, pipeline, libraries, safeguards, metrics, and limitations using only confirmed project facts.",
+      "Do not convert planned enhancements, notebook experiments, temporary tunnel links, or README aspirations into production claims."
+    ],
+    "unknown_professional_answer": "That information is not included in my verified profile. You can contact me directly for clarification.",
+    "unknown_skill_answer_template": "I do not yet have direct hands-on experience with {skill} recorded in my verified profile, but I am a fast learner and can adapt quickly.",
+    "private_question_answer": "I can help with Kottu Saikumar's professional background, skills, projects, education, experience, and public contact details, but I cannot provide unrelated private information.",
+    "allowed_public_contact_fields": [
+      "email",
+      "phone",
+      "github",
+      "linkedin",
+      "leetcode",
+      "portfolio"
+    ],
+    "blocked_private_topics": [
+      "family details",
+      "family phone numbers",
+      "relationships",
+      "passwords",
+      "financial accounts",
+      "bank details",
+      "identity documents",
+      "Aadhaar",
+      "private address",
+      "unverified health, political, religious, or other sensitive personal attributes"
+    ]
+  },
+  "unresolved_or_dynamic_facts": [
+    {
+      "topic": "SSC education",
+      "status": "needs_confirmation",
+      "handling": "Do not state publicly until reconfirmed."
+    },
+    {
+      "topic": "Drug project dates",
+      "status": "conflicting_sources",
+      "handling": "Describe the project without exact dates."
+    },
+    {
+      "topic": "Current SocialTek role and dates",
+      "status": "not_verified",
+      "handling": "Use the neutral approved FAQ answer."
+    },
+    {
+      "topic": "LeetCode solved count and ranking",
+      "status": "dynamic_not_verified",
+      "handling": "Share only the profile URL."
+    },
+    {
+      "topic": "LinkedIn follower and connection counts",
+      "status": "dynamic",
+      "handling": "Do not include in answers."
+    },
+    {
+      "topic": "New premium portfolio GitHub Pages URL",
+      "status": "not_confirmed_live",
+      "handling": "Do not claim it is deployed until confirmed."
+    }
+  ],
+  "implementation_hints": {
+    "recommended_matching": [
+      "Exact FAQ match",
+      "Normalized keyword matching",
+      "Fuzzy matching",
+      "Intent scoring"
+    ],
+    "model_required": false,
+    "database_required": false,
+    "recommended_runtime_file": "kottu_saikumar_portfolio_chatbot_knowledge_base.json",
+    "recommended_frontend_behavior": "Load the JSON at startup, classify the user question into an intent, retrieve the closest FAQ or project record, and return the approved answer."
+  }
+}

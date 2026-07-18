@@ -1,0 +1,359 @@
+/* 02 / CAPABILITIES ------------------------------------------------------ */
+
+.capabilities-section {
+  padding-block: 7rem 8rem;
+  background: var(--green);
+}
+
+.capabilities-shell {
+  display: grid;
+  gap: 2.5rem;
+  justify-items: center;
+  text-align: center;
+}
+
+.capabilities-eyebrow {
+  justify-content: center;
+  margin-bottom: 0;
+}
+
+.capabilities-title-row {
+  display: grid;
+  justify-items: center;
+}
+
+.capabilities-role-title {
+  font-family: var(--serif);
+  font-size: clamp(2.1rem, 4.4vw, 3.6rem);
+  font-weight: 400;
+  letter-spacing: -0.02em;
+  color: var(--mint-light);
+}
+
+/* --- TextMorph primitive ------------------------------------------------ */
+
+.text-morph {
+  position: relative;
+  display: inline-grid;
+  justify-items: center;
+}
+
+.text-morph-spacer {
+  visibility: hidden;
+  white-space: nowrap;
+  pointer-events: none;
+}
+
+.text-morph-stack {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  justify-items: center;
+  align-items: center;
+}
+
+.text-morph-layer {
+  grid-area: 1 / 1;
+  white-space: nowrap;
+  will-change: filter, opacity, transform;
+}
+
+/* --- Skill grid panel ---------------------------------------------------- */
+
+.capabilities-panel {
+  width: 100%;
+  padding: clamp(1.5rem, 3vw, 2.75rem);
+  background: linear-gradient(180deg, rgb(255 255 255 / 4%), rgb(0 0 0 / 12%)), #0c2e1e;
+  border: 1px solid rgb(183 244 205 / 14%);
+  border-radius: var(--radius-lg);
+  box-shadow: 0 30px 70px rgb(0 0 0 / 30%), inset 0 0 0 1px rgb(183 244 205 / 6%);
+}
+
+.skill-grid {
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  gap: clamp(0.55rem, 1vw, 1rem);
+}
+
+.skill-tile {
+  position: relative;
+  isolation: isolate;
+  display: grid;
+  justify-items: center;
+  gap: 0.5rem;
+  padding: 0.82rem 0.5rem 0.9rem;
+  color: var(--paper);
+  background: linear-gradient(155deg, rgb(255 255 255 / 7%), rgb(255 255 255 / 2%));
+  border: 1px solid rgb(183 244 205 / 16%);
+  border-radius: var(--radius-sm);
+  /* border-color/box-shadow/filter are never touched by the GSAP entrance
+     timeline, so they can transition immediately. opacity/transform ARE
+     driven by that entrance stagger, so their transition only turns on
+     once `.is-revealed` lands on the panel (see CapabilitiesSection.tsx) -
+     otherwise this rule fights GSAP's inline opacity/transform writes on
+     every animation frame and the tiles never visually reach opacity: 1. */
+  transition: border-color 0.35s var(--ease-body), box-shadow 0.35s var(--ease-body), filter 0.35s var(--ease-body);
+}
+
+.capabilities-panel.is-revealed .skill-tile {
+  transition: transform 0.35s var(--ease-body), opacity 0.35s var(--ease-body), border-color 0.35s var(--ease-body),
+    box-shadow 0.35s var(--ease-body), filter 0.35s var(--ease-body);
+}
+
+.skill-tile::before {
+  content: '';
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  border-radius: inherit;
+  background: radial-gradient(circle at 50% 20%, rgb(183 244 205 / 10%), transparent 58%);
+  opacity: 0.7;
+  transition: opacity 0.35s var(--ease-body), background 0.35s var(--ease-body);
+}
+
+/* NOTE: inactive tiles are intentionally *not* dimmed via a single
+   tile-level `opacity`. CSS opacity on a parent composites the whole
+   subtree at that alpha, so the label text (already sub-100% white)
+   ends up rendering far dimmer than intended and becomes hard to read
+   against the dark panel. Instead we dim only the icon + background +
+   border, and give the label its own explicit, always-readable color. */
+.skill-tile.is-inactive {
+  background: linear-gradient(155deg, rgb(255 255 255 / 5%), rgb(255 255 255 / 2%));
+  border-color: rgb(183 244 205 / 12%);
+}
+
+.skill-tile.is-inactive .skill-tile-icon,
+.skill-tile.is-inactive .skill-tile-glyph {
+  opacity: 0.82;
+  filter: saturate(0.92);
+}
+
+.skill-tile.is-inactive .skill-tile-label {
+  color: rgb(244 240 229 / 82%);
+}
+
+.skill-tile.is-active {
+  filter: saturate(1);
+}
+
+.capabilities-panel.is-revealed .skill-tile.is-active {
+  animation: role-skill-zoom 0.58s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes role-skill-zoom {
+  0% { scale: 0.96; }
+  58% { scale: 1.035; }
+  100% { scale: 1; }
+}
+
+.skill-tile.is-active.is-featured {
+  transform: scale(1.045);
+  border-color: var(--tile-accent, var(--mint-light));
+  background: linear-gradient(155deg, rgb(255 255 255 / 11%), rgb(255 255 255 / 3%));
+  box-shadow: 0 14px 30px rgb(0 0 0 / 25%), 0 0 0 1px var(--tile-accent, var(--mint-light)),
+    0 0 24px color-mix(in srgb, var(--tile-accent, var(--mint-light)) 24%, transparent);
+}
+
+.skill-tile.is-active.is-featured::before {
+  background: radial-gradient(circle at 50% 18%, color-mix(in srgb, var(--tile-accent, var(--mint-light)) 22%, transparent), transparent 62%);
+  opacity: 1;
+}
+
+@media (hover: hover) {
+  .skill-tile:hover {
+    transform: translateY(-2px);
+    border-color: rgb(183 244 205 / 32%);
+    box-shadow: 0 12px 24px rgb(0 0 0 / 18%);
+  }
+
+  .skill-tile.is-active.is-featured:hover {
+    transform: translateY(-2px) scale(1.045);
+  }
+}
+
+.skill-tile:focus-visible {
+  outline: 2px solid var(--mint-light);
+  outline-offset: 3px;
+}
+
+.skill-tile-icon {
+  display: grid;
+  place-items: center;
+  width: 2rem;
+  height: 2rem;
+  color: var(--brand-color, #b7f4cd);
+  transition: color 0.35s var(--ease-body), opacity 0.35s var(--ease-body), filter 0.35s var(--ease-body),
+    transform 0.35s var(--ease-body);
+}
+
+.skill-tile-icon svg {
+  width: 1.7rem;
+  height: 1.7rem;
+  overflow: visible;
+  filter: drop-shadow(0 3px 7px rgb(0 0 0 / 28%));
+}
+
+.skill-tile.has-glyph-icon.is-active .skill-tile-icon {
+  color: var(--tile-accent, var(--mint-light));
+}
+
+.skill-tile.is-active.is-featured .skill-tile-icon {
+  transform: translateY(-1px) scale(1.08);
+}
+
+.skill-tile-glyph {
+  display: grid;
+  min-width: 1.9rem;
+  min-height: 1.9rem;
+  place-items: center;
+  padding-inline: 0.25rem;
+  font-size: 0.72rem;
+  font-weight: 850;
+  line-height: 1;
+  letter-spacing: 0.035em;
+  color: inherit;
+  border: 1px solid currentColor;
+  border-radius: 0.55rem;
+  background: rgb(255 255 255 / 4%);
+}
+
+.skill-tile-label {
+  font-size: 0.7rem;
+  font-weight: 700;
+  line-height: 1.25;
+  letter-spacing: 0.015em;
+  text-align: center;
+  color: rgb(255 252 245 / 92%);
+  text-shadow: 0 1px 8px rgb(0 0 0 / 35%);
+  transition: color 0.35s var(--ease-body), text-shadow 0.35s var(--ease-body);
+}
+
+.skill-tile.is-active .skill-tile-label {
+  color: #fffdf7;
+  text-shadow: 0 0 12px color-mix(in srgb, var(--tile-accent, var(--mint-light)) 24%, transparent);
+}
+
+/* CSS-only corner-fold fallback: tablet overflow, mobile, reduced motion, or no WebGL. */
+.skill-tile.has-css-fold {
+  overflow: hidden;
+}
+
+.skill-tile.has-css-fold::after {
+  content: '';
+  position: absolute;
+  right: -1px;
+  bottom: -1px;
+  width: 1.1rem;
+  height: 1.1rem;
+  background: linear-gradient(135deg, transparent 50%, var(--tile-accent, var(--mint-light)) 50%);
+  border-top-left-radius: 0.35rem;
+  opacity: 0;
+  transform: translate(4px, 4px);
+  transition: opacity 0.3s var(--ease-body), transform 0.3s var(--ease-body);
+}
+
+.skill-tile.has-css-fold.is-active::after {
+  opacity: 0.9;
+  transform: translate(0, 0);
+}
+
+.sticker-peel-layer {
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  pointer-events: none;
+}
+
+.sticker-peel-canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+/* --- Role filter buttons (reduced motion only) --------------------------- */
+
+.capabilities-role-filters {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.6rem;
+}
+
+.capabilities-role-filters button {
+  padding: 0.5rem 1rem;
+  color: var(--paper);
+  background: rgb(255 255 255 / 6%);
+  border: 1px solid rgb(183 244 205 / 20%);
+  border-radius: 999px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+}
+
+.capabilities-role-filters button.is-active {
+  color: var(--ink);
+  background: var(--mint-light);
+  border-color: var(--mint-light);
+}
+
+/* --- Certifications strip ------------------------------------------------ */
+
+.capabilities-certifications {
+  width: 100%;
+  max-width: 62rem;
+  padding-top: 0.75rem;
+  text-align: center;
+}
+
+.capabilities-certifications-label {
+  margin: 0 0 0.75rem;
+  color: var(--mint-light);
+  font-size: 0.8rem;
+  font-weight: 800;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.capabilities-certifications ul {
+  display: grid;
+  gap: 0.35rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.capabilities-certifications li {
+  font-size: clamp(1rem, 1.15vw, 1.12rem);
+  line-height: 1.45;
+  color: rgb(244 240 229 / 82%);
+}
+
+.cert-title { font-weight: 700; color: var(--paper); }
+.cert-issuer { color: rgb(244 240 229 / 86%); }
+
+/* --- Responsive ----------------------------------------------------------- */
+
+@media (max-width: 1024px) {
+  .skill-grid { grid-template-columns: repeat(6, 1fr); }
+  .skill-tile-label { font-size: 0.62rem; }
+}
+
+@media (max-width: 640px) {
+  .capabilities-section { padding-block: 5rem 6rem; }
+  .skill-grid { grid-template-columns: repeat(4, 1fr); }
+  .capabilities-panel { border-radius: var(--radius-md); }
+  .skill-tile { padding: 0.7rem 0.4rem; }
+}
+
+@media (max-width: 380px) {
+  .skill-grid { grid-template-columns: repeat(3, 1fr); }
+}
+
+/* --- Reduced motion -------------------------------------------------------- */
+
+@media (prefers-reduced-motion: reduce) {
+  .skill-tile { transition: none; }
+  .capabilities-panel.is-revealed .skill-tile.is-active { animation: none; }
+  .skill-tile.has-css-fold::after { transition: none; }
+}
