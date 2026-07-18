@@ -447,6 +447,15 @@ h2 { margin-bottom: 0; font-size: clamp(3.3rem, 7.2vw, 8.5rem); }
 .book-overlay-1 .project-detail-group li,
 .book-overlay-2 .project-detail-group li,
 .book-overlay-3 .project-detail-group li { font-size: .64rem; line-height: 1.24; }
+.book-overlay-1 .project-page-scroll,
+.book-overlay-2 .project-page-scroll,
+.book-overlay-3 .project-page-scroll { position: relative; padding-bottom: 2rem; }
+.book-overlay-1 .project-links,
+.book-overlay-2 .project-links,
+.book-overlay-3 .project-links {
+  position: absolute; z-index: 2; right: .9rem; bottom: .5rem; left: .9rem; justify-content: flex-end;
+  margin: 0; padding-top: .3rem; background: linear-gradient(to bottom, transparent, rgb(244 240 229 / 96%) 35%);
+}
 
 @media (min-width: 981px) and (max-width: 1150px) {
   .book-right-page h3 { font-size: clamp(1.45rem, 2.2vw, 2rem); }
