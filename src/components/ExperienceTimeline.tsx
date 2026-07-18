@@ -67,7 +67,7 @@ export function ExperienceTimeline() {
     if (!section || !stage || !sequence || reducedMotion) return
 
     const media = gsap.matchMedia()
-    media.add('(min-width: 1101px) and (min-height: 700px)', () => {
+    media.add('(min-width: 1101px) and (min-height: 600px)', () => {
       const projectFrame = sequence.querySelector<HTMLElement>('.experience-project-frame')
       const projectSlides = gsap.utils.toArray<HTMLElement>('.experience-project-slide', sequence)
       const steps = gsap.utils.toArray<HTMLElement>('.experience-sequence-step', stage)

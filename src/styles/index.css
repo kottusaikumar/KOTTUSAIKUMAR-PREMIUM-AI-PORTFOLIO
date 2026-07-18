@@ -331,7 +331,7 @@ h2 { margin-bottom: 0; font-size: clamp(3.3rem, 7.2vw, 8.5rem); }
 .education-meta { display: flex; flex-wrap: wrap; justify-content: space-between; gap: .6rem 1rem; margin-top: .8rem; color: var(--green-deep); font-size: .76rem; }
 .education-meta strong { font-weight: 750; }
 
-@media (min-width: 1101px) and (min-height: 700px) {
+@media (min-width: 1101px) and (min-height: 600px) {
   .experience-stage { height: min(86svh, 55rem); min-height: 44rem; display: grid; grid-template-rows: auto auto minmax(0, 1fr) auto; }
   .experience-stage .experience-company-header { padding: 1.05rem 1.4rem; }
   .experience-stage .experience-company-identity img { width: 52px; height: 52px; border-radius: .8rem; }
@@ -420,21 +420,23 @@ h2 { margin-bottom: 0; font-size: clamp(3.3rem, 7.2vw, 8.5rem); }
 .page-scroll-rail.is-idle { opacity: .18; }
 .page-scroll-rail.is-hidden { opacity: 0; }
 .page-scroll-thumb { position: absolute; left: 0; width: 100%; min-height: 10%; border-radius: 999px; background: var(--green-deep); }
-.book-overlay-compact .project-page-scroll { padding: clamp(.52rem, .95vw, .82rem) clamp(.9rem, 1.5vw, 1.3rem) clamp(.52rem, .95vw, .82rem) clamp(.52rem, .95vw, .82rem); }
+.book-overlay-compact .project-page-scroll { overflow: hidden; padding: clamp(.4rem, .7vw, .62rem) clamp(.62rem, 1vw, .9rem); }
 .book-overlay-compact .project-number { margin-bottom: .32rem; font-size: .58rem; }
-.book-overlay-compact .book-right-page h3 { margin-bottom: .32rem; font-size: clamp(1.5rem, 2vw, 2.3rem); }
-.book-overlay-compact .project-description { font-size: clamp(.74rem, .78vw, .86rem); line-height: 1.42; }
-.book-overlay-compact .project-facts { gap: .4rem; margin: .35rem 0; padding: .32rem 0; }
+.book-overlay-compact .book-right-page h3 { margin-bottom: .25rem; font-size: clamp(1.35rem, 1.75vw, 1.85rem); }
+.book-overlay-compact .project-description { font-size: clamp(.68rem, .7vw, .76rem); line-height: 1.32; }
+.book-overlay-compact .project-facts { gap: .35rem; margin: .28rem 0; padding: .25rem 0; }
 .book-overlay-compact .project-facts dt { margin-bottom: .18rem; font-size: .6rem; }
-.book-overlay-compact .project-facts dd { font-size: clamp(.74rem, .78vw, .86rem); }
+.book-overlay-compact .project-facts dd { font-size: clamp(.68rem, .7vw, .76rem); }
 .book-overlay-compact .book-right-page .tag-list { gap: .2rem; }
-.book-overlay-compact .book-right-page .tag-list span { padding: .26rem .4rem; font-size: .58rem; }
-.book-overlay-compact .project-detail-groups { gap: .8rem; margin-top: .7rem; padding-top: .65rem; }
-.book-overlay-compact .project-detail-group h4 { font-size: .62rem; }
-.book-overlay-compact .project-detail-group li { font-size: .78rem; }
-.book-overlay-compact .project-links { margin-top: .9rem; padding-top: .4rem; }
-.book-overlay-compact .project-links a { font-size: .76rem; }
+.book-overlay-compact .book-right-page .tag-list span { padding: .2rem .32rem; font-size: .52rem; }
+.book-overlay-compact .project-detail-groups { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .55rem; margin-top: .5rem; padding-top: .45rem; }
+.book-overlay-compact .project-detail-group h4 { margin-bottom: .3rem; font-size: .56rem; }
+.book-overlay-compact .project-detail-group ul { gap: .25rem; }
+.book-overlay-compact .project-detail-group li { padding-left: .7rem; font-size: .67rem; line-height: 1.3; }
+.book-overlay-compact .project-links { margin-top: auto; padding-top: .2rem; }
+.book-overlay-compact .project-links a { font-size: .68rem; }
 .book-overlay-compact .project-media-label { top: .8rem; right: .9rem; left: .9rem; font-size: .45rem; }
+.book-overlay-compact .page-scroll-rail { display: none; }
 
 @media (min-width: 981px) and (max-width: 1150px) {
   .book-right-page h3 { font-size: clamp(1.45rem, 2.2vw, 2rem); }
@@ -490,7 +492,7 @@ h2 { margin-bottom: 0; font-size: clamp(3.3rem, 7.2vw, 8.5rem); }
 .proof-visual::after { content: ''; position: absolute; inset: 0; background: linear-gradient(145deg, transparent 48%, rgb(4 67 42 / 26%)); }
 .proof-visual img { width: 100%; height: 100%; display: block; object-fit: cover; }
 .proof-visual-1 { top: 7%; left: 20%; }
-.proof-visual-2 { top: 17%; right: -2%; }
+.proof-visual-2 { top: 17%; right: 2%; }
 .proof-visual-3 { bottom: 5%; left: 1%; }
 .proof-visual-4 { right: 19%; bottom: 4%; }
 .proof-orbit { position: absolute; z-index: 2; inset: 0; padding: 0; margin: 0; list-style: none; pointer-events: none; }
@@ -595,10 +597,10 @@ h2 { margin-bottom: 0; font-size: clamp(3.3rem, 7.2vw, 8.5rem); }
   .about-links { margin-top: 1.4rem; }
 
   .experience-section { padding-block: 6rem 8rem; }
-  .experience-layout { width: min(100%, 82rem); grid-template-columns: minmax(17rem, .48fr) minmax(0, 1.52fr); gap: 2.75rem; }
+  .experience-layout { width: min(100%, 76rem); grid-template-columns: minmax(16rem, .46fr) minmax(0, 1.54fr); gap: 2.5rem; }
   .experience-heading h2 { font-size: clamp(3.7rem, 4vw, 4.6rem); }
   .experience-heading-note { max-width: 23rem; font-size: 1.08rem; }
-  .experience-stage { height: min(70svh, 40rem); min-height: 34rem; }
+  .experience-stage { height: min(72svh, 36rem); min-height: 31rem; }
   .experience-stage .experience-company-header { padding: .78rem 1.05rem; }
   .experience-stage .experience-company-identity img { width: 44px; height: 44px; }
   .experience-stage .experience-company-identity h3 { font-size: clamp(1.65rem, 1.9vw, 2.05rem); }
@@ -611,11 +613,12 @@ h2 { margin-bottom: 0; font-size: clamp(3.3rem, 7.2vw, 8.5rem); }
   .experience-sequence.is-animated .experience-metrics li { min-height: 3.45rem; padding: .4rem .6rem; }
   .experience-sequence.is-animated .experience-contributions li { font-size: .76rem; line-height: 1.38; }
   .experience-sequence.is-animated .experience-project-footer { margin-top: .5rem; padding-top: .45rem; }
-  .experience-sequence.is-animated .experience-education { padding: 1.45rem 1.8rem; }
-  .experience-sequence.is-animated .education-entry { padding-block: 1rem; }
-  .experience-sequence.is-animated .education-note h3 { font-size: clamp(1.35rem, 1.75vw, 1.7rem); }
-  .experience-sequence.is-animated .education-note p { margin-top: .45rem; font-size: .86rem; }
-  .experience-sequence.is-animated .education-meta { margin-top: .5rem; }
+  .experience-education { padding: 1.35rem 1.7rem; }
+  .experience-education .education-list { margin-top: .65rem; }
+  .experience-education .education-entry { padding-block: .9rem; }
+  .experience-education h3 { font-size: clamp(1.3rem, 1.65vw, 1.65rem); }
+  .experience-education p { margin-top: .4rem; font-size: .84rem; }
+  .experience-education .education-meta { margin-top: .45rem; }
 
   .process-section { padding-block: 6rem; }
   .process-section .wide-heading { max-width: 54rem; }

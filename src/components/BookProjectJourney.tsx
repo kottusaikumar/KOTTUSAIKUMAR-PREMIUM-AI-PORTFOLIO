@@ -210,7 +210,7 @@ function ProjectDetails({
   return (
     <article
       ref={overlayRef}
-      className={mobile ? 'mobile-project' : `book-overlay book-overlay-${index + 1}${index > 2 ? ' book-overlay-compact' : ''}`}
+      className={mobile ? 'mobile-project' : `book-overlay book-overlay-${index + 1} book-overlay-compact`}
       style={pageStyle}
       aria-hidden={!mobile && !active}
     >
