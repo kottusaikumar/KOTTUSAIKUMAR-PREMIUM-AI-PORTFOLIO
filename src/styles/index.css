@@ -463,6 +463,25 @@ h2 { margin-bottom: 0; font-size: clamp(3.3rem, 7.2vw, 8.5rem); }
 .book-overlay-3 .project-links {
   position: static; justify-content: flex-start; margin: .45rem 0 3rem; padding-top: .38rem; background: none;
 }
+.book-overlay-4 .project-detail-groups,
+.book-overlay-5 .project-detail-groups {
+  flex: 1 1 auto; grid-template-columns: minmax(0, 1fr); gap: .28rem; margin-top: .4rem; padding-top: .38rem;
+}
+.book-overlay-4 .project-detail-group ul,
+.book-overlay-5 .project-detail-group ul { flex: 1 1 auto; align-content: space-evenly; gap: .18rem; }
+.book-overlay-4 .project-detail-group li,
+.book-overlay-5 .project-detail-group li { font-size: .61rem; line-height: 1.22; }
+.book-overlay-4 .book-right-page h3,
+.book-overlay-5 .book-right-page h3 { font-size: clamp(1.45rem, 1.75vw, 1.95rem); line-height: .95; }
+.book-overlay-4 .project-description,
+.book-overlay-5 .project-description { font-size: .7rem; line-height: 1.28; }
+.book-overlay-4 .project-page-scroll,
+.book-overlay-5 .project-page-scroll { padding-bottom: clamp(.4rem, .7vw, .62rem); }
+.book-overlay-4 .project-links,
+.book-overlay-5 .project-links {
+  position: static; justify-content: flex-start; margin: .35rem 0 2.8rem; padding-top: .32rem; background: none;
+}
+.book-overlay-5 .project-links { margin-bottom: 1rem; }
 
 @media (min-width: 981px) and (max-width: 1150px) {
   .book-right-page h3 { font-size: clamp(1.45rem, 2.2vw, 2rem); }
