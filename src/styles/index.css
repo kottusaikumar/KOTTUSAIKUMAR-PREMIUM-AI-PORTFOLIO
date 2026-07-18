@@ -571,6 +571,13 @@ h2 { margin-bottom: 0; font-size: clamp(3.3rem, 7.2vw, 8.5rem); }
    especially tall (common on 1080p laptops/desktops and at browser zoom).
    The book/project journey is intentionally excluded. */
 @media (min-width: 1400px) and (max-height: 1000px) {
+  .pill-nav { width: min(calc(100vw - 2rem), 31rem); }
+  .pill-dock { min-height: 4.35rem; grid-template-columns: 3.45rem minmax(0, 1fr) 4.55rem; gap: .35rem; padding: .34rem; }
+  .pill-assistant-button,
+  .pill-nav .audio-control .icon-button { width: 3.45rem; height: 3.45rem; }
+  .pill-cta { min-height: 3.45rem; padding-inline: 1rem; font-size: .92rem; }
+  .menu-button { width: 4.35rem; height: 3.45rem; }
+
   .resume-paper-card { height: min(66svh, 40rem); max-width: min(72vw, 34rem); }
   .resume-story-header h2 { font-size: clamp(2rem, 2.6vw, 3.2rem); }
   .resume-story-message { width: min(46vw, 46rem); }
@@ -578,20 +585,37 @@ h2 { margin-bottom: 0; font-size: clamp(3.3rem, 7.2vw, 8.5rem); }
 
   .about-section { padding-block: 5.5rem 6.5rem; }
   .about-section .section-shell { max-width: 82rem; }
-  .about-grid { grid-template-columns: .72fr 1.28fr; gap: 3.5rem; }
+  .about-grid { grid-template-columns: .66fr 1.34fr; gap: 3.25rem; }
   .about-heading h2 { font-size: clamp(4.5rem, 5.15vw, 6rem); }
-  .portrait-frame { width: min(100%, 24rem); }
-  .portrait-card { margin-bottom: 3.2rem; }
+  .portrait-frame { width: min(100%, 21rem); }
+  .portrait-card { margin-bottom: 2.6rem; }
   .about-copy { padding-top: .75rem; }
-  .about-copy > p { max-width: 40rem; font-size: clamp(1.12rem, 1.18vw, 1.28rem); line-height: 1.45; }
+  .about-copy > p { max-width: 42rem; font-size: clamp(1.24rem, 1.28vw, 1.36rem); line-height: 1.48; }
   .about-copy > p + p { margin-top: 1rem; }
   .about-links { margin-top: 1.4rem; }
 
   .experience-section { padding-block: 6rem 8rem; }
-  .experience-layout { width: min(100%, 90rem); grid-template-columns: minmax(19rem, .52fr) minmax(0, 1.48fr); gap: 3.5rem; }
-  .experience-heading h2 { font-size: clamp(4rem, 4.5vw, 5.2rem); }
+  .experience-layout { width: min(100%, 82rem); grid-template-columns: minmax(17rem, .48fr) minmax(0, 1.52fr); gap: 2.75rem; }
+  .experience-heading h2 { font-size: clamp(3.7rem, 4vw, 4.6rem); }
   .experience-heading-note { max-width: 23rem; font-size: 1.08rem; }
-  .experience-stage { height: min(78svh, 45rem); min-height: 39rem; }
+  .experience-stage { height: min(70svh, 40rem); min-height: 34rem; }
+  .experience-stage .experience-company-header { padding: .78rem 1.05rem; }
+  .experience-stage .experience-company-identity img { width: 44px; height: 44px; }
+  .experience-stage .experience-company-identity h3 { font-size: clamp(1.65rem, 1.9vw, 2.05rem); }
+  .experience-stage .experience-company-summary { padding: .58rem 1.05rem .65rem; font-size: .84rem; }
+  .experience-sequence.is-animated .experience-sequence-panel { inset: 0 .7rem .6rem; }
+  .experience-sequence.is-animated .experience-project-body { padding: .72rem .95rem; }
+  .experience-sequence.is-animated .experience-project-body h4 { font-size: clamp(1.65rem, 1.85vw, 2.05rem); }
+  .experience-sequence.is-animated .experience-project-summary { font-size: .76rem; }
+  .experience-sequence.is-animated .experience-metrics { margin: .55rem 0; }
+  .experience-sequence.is-animated .experience-metrics li { min-height: 3.45rem; padding: .4rem .6rem; }
+  .experience-sequence.is-animated .experience-contributions li { font-size: .76rem; line-height: 1.38; }
+  .experience-sequence.is-animated .experience-project-footer { margin-top: .5rem; padding-top: .45rem; }
+  .experience-sequence.is-animated .experience-education { padding: 1.45rem 1.8rem; }
+  .experience-sequence.is-animated .education-entry { padding-block: 1rem; }
+  .experience-sequence.is-animated .education-note h3 { font-size: clamp(1.35rem, 1.75vw, 1.7rem); }
+  .experience-sequence.is-animated .education-note p { margin-top: .45rem; font-size: .86rem; }
+  .experience-sequence.is-animated .education-meta { margin-top: .5rem; }
 
   .process-section { padding-block: 6rem; }
   .process-section .wide-heading { max-width: 54rem; }
@@ -600,11 +624,11 @@ h2 { margin-bottom: 0; font-size: clamp(3.3rem, 7.2vw, 8.5rem); }
   .process-step { min-height: 19rem; padding: 1.6rem 1.35rem; }
   .process-step h3 { margin: 3.5rem 0 1rem; font-size: clamp(2rem, 2.25vw, 2.65rem); }
 
-  .proof-heading { width: min(50vw, 50rem); }
-  .proof-heading h2 { font-size: clamp(4.5rem, 5.2vw, 6.1rem); line-height: .82; }
-  .proof-visual { width: clamp(12rem, 15vw, 18rem); }
-  .proof-card { width: clamp(12rem, 14vw, 15rem); padding: 1.2rem; }
-  .proof-card strong { font-size: clamp(3rem, 3.8vw, 4.25rem); }
+  .proof-heading { width: min(47vw, 46rem); }
+  .proof-heading h2 { font-size: clamp(4.2rem, 4.8vw, 5.55rem); line-height: .84; }
+  .proof-visual { width: clamp(11rem, 13.5vw, 15.75rem); }
+  .proof-card { width: clamp(11rem, 12.5vw, 13.25rem); padding: 1rem; }
+  .proof-card strong { font-size: clamp(2.7rem, 3.35vw, 3.65rem); }
   .proof-1 { left: clamp(2.5rem, 6vw, 7rem); }
   .proof-2 { right: clamp(2.5rem, 6vw, 7rem); }
   .proof-3 { left: clamp(3rem, 8vw, 9rem); }
@@ -740,7 +764,7 @@ h2 { margin-bottom: 0; font-size: clamp(3.3rem, 7.2vw, 8.5rem); }
   .hero-frame-skills { top: 10%; left: var(--gutter); }
   .hero-frame-proof { right: var(--gutter); bottom: 12%; }
   .scroll-hint { display: none; }
-  .pill-nav { width: min(calc(100% - 1rem), 31rem); bottom: max(.65rem, env(safe-area-inset-bottom)); }
+  .pill-nav { width: min(calc(100% - 1.25rem), 28rem); bottom: max(.65rem, env(safe-area-inset-bottom)); }
   .pill-dock { min-height: 4.4rem; grid-template-columns: 3.45rem minmax(0, 1fr) 4.45rem; gap: .32rem; padding: .34rem; }
   .pill-assistant-button { width: 3.45rem; height: 3.45rem; font-size: .64rem; }
   .pill-assistant-icon { width: 1.86rem; height: 1.86rem; }
@@ -800,8 +824,11 @@ h2 { margin-bottom: 0; font-size: clamp(3.3rem, 7.2vw, 8.5rem); }
   .mobile-project .book-left-page { padding: 0; transform: none; }
   .mobile-project .book-left-page::before { display: none; }
   .mobile-project .book-right-page { max-height: none; overflow: visible; padding: 0; border-radius: 0; box-shadow: none; transform: none; background: transparent; }
-  .mobile-project .project-page-scroll { height: auto; overflow: visible; padding: 1.5rem .25rem .25rem; }
-  .mobile-project .book-right-page h3 { font-size: 2.7rem; }
+  .mobile-project .project-page-scroll { height: auto; overflow: visible; padding: 1.1rem .2rem .2rem; }
+  .mobile-project .book-right-page h3 { font-size: clamp(1.9rem, 8vw, 2.1rem); }
+  .mobile-project .book-right-page .project-description { font-size: .92rem; line-height: 1.5; }
+  .mobile-project .project-detail-groups { gap: .85rem; margin-top: .8rem; padding-top: .8rem; }
+  .mobile-project .project-detail-group li { font-size: .86rem; line-height: 1.45; }
   .project-facts { grid-template-columns: 1fr; }
   .process-grid { margin-top: 4rem; grid-template-columns: 1fr; }
   .process-step, .process-step:nth-child(2) { min-height: auto; border-right: 0; border-bottom: 1px solid #bdb5a7; }
