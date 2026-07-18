@@ -2,20 +2,30 @@ import { useEffect, useRef, useState } from 'react'
 import type { Project } from '../types/portfolio'
 import { MediaErrorFallback } from './MediaErrorFallback'
 
-export function ProjectVideo({ project, active, controls = false }: { project: Project; active: boolean; controls?: boolean }) {
+export function ProjectVideo({
+  project,
+  active,
+  mediaReady,
+  controls = false,
+}: {
+  project: Project
+  active: boolean
+  mediaReady: boolean
+  controls?: boolean
+}) {
   const ref = useRef<HTMLVideoElement>(null)
   const [failed, setFailed] = useState(false)
 
   useEffect(() => {
     const video = ref.current
-    if (!video || controls) return
+    if (!video || controls || !mediaReady) return
     if (active) {
       video.currentTime = 0
       video.play().catch(() => undefined)
     } else {
       video.pause()
     }
-  }, [active, controls])
+  }, [active, controls, mediaReady])
 
   if (failed) return <MediaErrorFallback label={project.title} />
 
@@ -23,8 +33,8 @@ export function ProjectVideo({ project, active, controls = false }: { project: P
     <video
       ref={ref}
       className="project-video"
-      src={project.video}
-      poster={project.poster}
+      src={mediaReady ? project.video : undefined}
+      poster={mediaReady ? project.poster : undefined}
       muted
       loop
       playsInline

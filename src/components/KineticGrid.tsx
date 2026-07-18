@@ -34,7 +34,8 @@ export function KineticGrid() {
     let columns: GridDot[][] = []
     let dots: GridDot[] = []
     let frameId = 0
-    let visible = true
+    let visible = false
+    let pointerListening = false
 
     const build = () => {
       const rect = host.getBoundingClientRect()
@@ -159,33 +160,51 @@ export function KineticGrid() {
     }
 
     const animate = () => {
-      if (visible) draw(true)
+      draw(true)
       frameId = window.requestAnimationFrame(animate)
+    }
+
+    const start = () => {
+      if (!visible) return
+      if (prefersReducedMotion) {
+        draw(false)
+        return
+      }
+      if (!pointerListening) {
+        window.addEventListener('pointermove', onPointerMove, { passive: true })
+        pointerListening = true
+      }
+      if (!frameId) frameId = window.requestAnimationFrame(animate)
+    }
+
+    const stop = () => {
+      if (frameId) window.cancelAnimationFrame(frameId)
+      frameId = 0
+      if (pointerListening) {
+        window.removeEventListener('pointermove', onPointerMove)
+        pointerListening = false
+      }
+      pointer.active = false
+      trail.length = 0
     }
 
     build()
     const resizeObserver = new ResizeObserver(() => {
       build()
-      if (prefersReducedMotion) draw(false)
+      if (visible && prefersReducedMotion) draw(false)
     })
     const intersectionObserver = new IntersectionObserver(([entry]) => {
       visible = entry.isIntersecting
-      if (!visible) pointer.active = false
+      if (visible) start()
+      else stop()
     })
     resizeObserver.observe(host)
     intersectionObserver.observe(host)
 
-    if (prefersReducedMotion) draw(false)
-    else {
-      window.addEventListener('pointermove', onPointerMove, { passive: true })
-      frameId = window.requestAnimationFrame(animate)
-    }
-
     return () => {
-      window.cancelAnimationFrame(frameId)
+      stop()
       resizeObserver.disconnect()
       intersectionObserver.disconnect()
-      window.removeEventListener('pointermove', onPointerMove)
     }
   }, [])
 

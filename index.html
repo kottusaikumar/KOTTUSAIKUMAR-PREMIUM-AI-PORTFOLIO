@@ -23,7 +23,15 @@
     <link rel="icon" href="./favicon.png" />
     <link rel="apple-touch-icon" href="./apple-touch-icon.png" />
     <link rel="manifest" href="./manifest.webmanifest" />
-    <link rel="preload" href="./resume-scroll/frames/resume-00.webp" as="image" type="image/webp" fetchpriority="high" />
+    <link
+      rel="preload"
+      href="./resume-scroll/responsive/resume-00-720.webp"
+      as="image"
+      type="image/webp"
+      imagesrcset="./resume-scroll/responsive/resume-00-480.webp 480w, ./resume-scroll/responsive/resume-00-720.webp 720w, ./resume-scroll/frames/resume-00.webp 1000w"
+      imagesizes="(max-width: 700px) 84vw, 38rem"
+      fetchpriority="high"
+    />
     <title>Kottu Saikumar - Full-Stack AI Developer</title>
     <script type="application/ld+json">
       {

@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import {
@@ -51,6 +51,7 @@ export function ResumeScrollStory() {
   const progressRef = useRef<HTMLSpanElement>(null)
   const phaseRef = useRef<HTMLSpanElement>(null)
   const reducedMotion = useReducedMotion()
+  const [auxiliaryMediaReady, setAuxiliaryMediaReady] = useState(false)
   const frames = useMemo(
     () => Array.from({ length: FRAME_COUNT }, (_, index) => `resume-scroll/frames/resume-${String(index).padStart(2, '0')}.webp`),
     [],
@@ -63,10 +64,38 @@ export function ResumeScrollStory() {
       image.src = source
     })
 
-    // Keep the first movement ready without downloading the full sequence
-    // during the initial page-load trace. The rest begins on first interaction.
-    preload(frames.slice(0, 4))
+    let earlyFramesReady = false
+    let remainingFramesReady = false
+    let idleId = 0
+    let fallbackId = 0
+
+    const loadEarlyFrames = () => {
+      if (earlyFramesReady) return
+      earlyFramesReady = true
+      preload(frames.slice(1, 4))
+      setAuxiliaryMediaReady(true)
+    }
+
+    const scheduleEarlyFrames = () => {
+      if ('requestIdleCallback' in window) {
+        idleId = window.requestIdleCallback(loadEarlyFrames, { timeout: 1800 })
+      } else {
+        fallbackId = globalThis.setTimeout(loadEarlyFrames, 350)
+      }
+    }
+
+    const handleCriticalLoad = () => scheduleEarlyFrames()
+    if (document.readyState === 'complete') scheduleEarlyFrames()
+    else window.addEventListener('load', handleCriticalLoad, { once: true })
+
+    // The intro completion is the earliest point at which the resume interaction
+    // becomes available, so prepare only the next three frames at that boundary.
+    window.addEventListener('portfolio:intro-complete', loadEarlyFrames, { once: true })
+
     const loadRemaining = () => {
+      loadEarlyFrames()
+      if (remainingFramesReady) return
+      remainingFramesReady = true
       preload(frames.slice(4))
       interactionEvents.forEach((event) => window.removeEventListener(event, loadRemaining))
     }
@@ -74,7 +103,11 @@ export function ResumeScrollStory() {
     interactionEvents.forEach((event) => window.addEventListener(event, loadRemaining, { once: true, passive: true }))
 
     return () => {
+      window.removeEventListener('load', handleCriticalLoad)
+      window.removeEventListener('portfolio:intro-complete', loadEarlyFrames)
       interactionEvents.forEach((event) => window.removeEventListener(event, loadRemaining))
+      if (idleId) window.cancelIdleCallback(idleId)
+      if (fallbackId) window.clearTimeout(fallbackId)
     }
   }, [frames])
 
@@ -104,7 +137,15 @@ export function ResumeScrollStory() {
     const updateFrame = () => {
       const frameIndex = Math.min(FRAME_COUNT - 1, Math.max(0, Math.round(frameState.value)))
       if (frameIndex !== currentFrame) {
+        if (currentFrame === -1 && frameIndex === 0) {
+          currentFrame = 0
+          return
+        }
         currentFrame = frameIndex
+        if (frameIndex > 0) {
+          paper.removeAttribute('srcset')
+          paper.removeAttribute('sizes')
+        }
         paper.src = frames[frameIndex]
       }
     }
@@ -258,7 +299,9 @@ export function ResumeScrollStory() {
             <img
               ref={paperRef}
               className="resume-paper-face resume-paper resume-paper-front"
-              src="resume-scroll/frames/resume-00.webp"
+              src="resume-scroll/responsive/resume-00-720.webp"
+              srcSet="resume-scroll/responsive/resume-00-480.webp 480w, resume-scroll/responsive/resume-00-720.webp 720w, resume-scroll/frames/resume-00.webp 1000w"
+              sizes="(max-width: 700px) 84vw, 38rem"
               alt="Kottu Saikumar's résumé"
               width="1000"
               height="1415"
@@ -269,7 +312,17 @@ export function ResumeScrollStory() {
         </div>
         <div className="resume-paper-ball-stage" aria-hidden="true">
           <span ref={shadowRef} className="resume-ball-shadow" />
-          <img ref={ballRef} className="resume-paper-ball" src="resume-scroll/resume-ball.webp" alt="" width="483" height="425" decoding="sync" />
+          <img
+            ref={ballRef}
+            className="resume-paper-ball"
+            src={auxiliaryMediaReady ? 'resume-scroll/responsive/resume-ball-240.webp' : undefined}
+            srcSet={auxiliaryMediaReady ? 'resume-scroll/responsive/resume-ball-240.webp 240w, resume-scroll/responsive/resume-ball-360.webp 360w, resume-scroll/resume-ball.webp 483w' : undefined}
+            sizes="(max-width: 700px) 9rem, 17rem"
+            alt=""
+            width="483"
+            height="425"
+            decoding="async"
+          />
         </div>
         <div className="resume-story-footer" aria-hidden="true">
           <span ref={phaseRef}>Approach the source</span>

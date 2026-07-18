@@ -83,8 +83,8 @@ export function TextMorph({ words, activeIndex, duration = 0.8, className = '', 
         </span>
       </span>
       {/* Single accessible label for the active role — screen readers never hear duplicate copies. */}
-      <Tag className="sr-only" tag={tag} role="status" aria-live="polite">
-        {words[activeIndex]}
+      <Tag className="sr-only" tag={tag}>
+        <span role="status" aria-live="polite" aria-atomic="true">{words[activeIndex]}</span>
       </Tag>
     </span>
   )

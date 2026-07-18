@@ -15,7 +15,6 @@ const filmTimeline: Array<[number, number]> = [
   [0.91, 28], [0.94, 28], [0.95, 29.2], [1, 29.2],
 ]
 
-const cnnCoverTime = 23.8
 const cnnCoverStart = 0.72
 const cnnCoverEnd = 0.79
 
@@ -182,12 +181,14 @@ function ProjectDetails({
   project,
   active,
   mobile = false,
+  mediaReady,
   overlayRef,
   index = 0,
 }: {
   project: Project
   active: boolean
   mobile?: boolean
+  mediaReady: boolean
   overlayRef?: (node: HTMLElement | null) => void
   index?: number
 }) {
@@ -216,7 +217,7 @@ function ProjectDetails({
     >
       <div className="book-left-page">
         <div className="project-media-label"><span>Project film</span><span>{project.number} / 05</span></div>
-        <ProjectVideo project={project} active={active} controls={mobile} />
+        <ProjectVideo project={project} active={active} mediaReady={mediaReady} controls={mobile} />
       </div>
       <div className="book-right-page">
         <div
@@ -269,7 +270,20 @@ export function BookProjectJourney() {
   const activeRef = useRef(-1)
   const [active, setActive] = useState(-1)
   const [filmFailed, setFilmFailed] = useState(false)
+  const [projectMediaReady, setProjectMediaReady] = useState(false)
   const reducedMotion = useReducedMotion()
+
+  useEffect(() => {
+    const section = sectionRef.current
+    if (!section) return
+    const observer = new IntersectionObserver(([entry]) => {
+      if (!entry.isIntersecting) return
+      setProjectMediaReady(true)
+      observer.disconnect()
+    }, { rootMargin: '1200px 0px 1200px 0px' })
+    observer.observe(section)
+    return () => observer.disconnect()
+  }, [])
 
   useEffect(() => {
     const section = sectionRef.current
@@ -287,26 +301,15 @@ export function BookProjectJourney() {
       frameProbe.width = 32
       frameProbe.height = 18
       const frameProbeContext = frameProbe.getContext('2d', { willReadFrequently: true })
-      let cnnCoverCaptured = false
-      let cnnCoverDecoded = false
-      let cnnPreloader: HTMLVideoElement | null = null
+      let cnnCoverDecoded = freezeFrame.complete && freezeFrame.naturalWidth > 0
       let armed = false
       let seekFrame = 0
 
-      const captureCnnCover = (source: HTMLVideoElement) => {
-        if (cnnCoverCaptured || !source.videoWidth || !source.videoHeight) return
-        const captureCanvas = document.createElement('canvas')
-        captureCanvas.width = source.videoWidth
-        captureCanvas.height = source.videoHeight
-        captureCanvas.getContext('2d')?.drawImage(source, 0, 0, captureCanvas.width, captureCanvas.height)
-        freezeFrame.src = captureCanvas.toDataURL('image/jpeg', 0.94)
-        cnnCoverCaptured = true
-        void freezeFrame.decode().then(() => {
-          cnnCoverDecoded = true
-          if (progressRef.current >= cnnCoverStart && progressRef.current < cnnCoverEnd) {
-            freezeFrame.style.opacity = '1'
-          }
-        })
+      const handleCnnCoverReady = () => {
+        cnnCoverDecoded = true
+        if (progressRef.current >= cnnCoverStart && progressRef.current < cnnCoverEnd) {
+          freezeFrame.style.opacity = '1'
+        }
       }
 
       const paintFrame = () => {
@@ -327,9 +330,6 @@ export function BookProjectJourney() {
         }
         canvas.getContext('2d')?.drawImage(video, 0, 0, canvas.width, canvas.height)
         canvas.style.opacity = '1'
-        if (!cnnCoverCaptured && Math.abs(targetTimeRef.current - cnnCoverTime) <= 1 / 24) {
-          captureCnnCover(video)
-        }
       }
 
       const applyOverlays = (progress: number) => {
@@ -369,19 +369,7 @@ export function BookProjectJourney() {
         paintFrame()
         if (Math.abs(video.currentTime - targetTimeRef.current) >= 1 / 48) scheduleSeek()
       }
-      const handleCnnPreloadMetadata = () => {
-        if (cnnPreloader) cnnPreloader.currentTime = cnnCoverTime
-      }
-      const handleCnnPreloadSeeked = () => {
-        if (!cnnPreloader) return
-        if ('requestVideoFrameCallback' in cnnPreloader) {
-          cnnPreloader.requestVideoFrameCallback(() => cnnPreloader && captureCnnCover(cnnPreloader))
-        } else {
-          captureCnnCover(cnnPreloader)
-        }
-      }
-
-      // Fetch the book video (and the hidden CNN-cover pre-loader) only once the section
+      // Fetch the book video only once the section
       // is genuinely about to be scrolled into view, so it never competes with initial load.
       const armMedia = () => {
         if (armed) return
@@ -389,15 +377,6 @@ export function BookProjectJourney() {
         video.preload = 'auto'
         video.src = 'media/book-scroll-optimized.mp4'
         video.load()
-
-        cnnPreloader = document.createElement('video')
-        cnnPreloader.muted = true
-        cnnPreloader.preload = 'auto'
-        cnnPreloader.playsInline = true
-        cnnPreloader.addEventListener('loadedmetadata', handleCnnPreloadMetadata, { once: true })
-        cnnPreloader.addEventListener('seeked', handleCnnPreloadSeeked, { once: true })
-        cnnPreloader.src = 'media/book-scroll-optimized.mp4'
-        cnnPreloader.load()
       }
 
       const intersectionObserver = new IntersectionObserver((entries) => {
@@ -410,6 +389,7 @@ export function BookProjectJourney() {
 
       video.addEventListener('seeked', handleSeeked)
       video.addEventListener('loadeddata', paintFrame)
+      freezeFrame.addEventListener('load', handleCnnCoverReady)
 
       const scrollTrigger = ScrollTrigger.create({
         trigger: section,
@@ -438,15 +418,9 @@ export function BookProjectJourney() {
       return () => {
         video.removeEventListener('seeked', handleSeeked)
         video.removeEventListener('loadeddata', paintFrame)
+        freezeFrame.removeEventListener('load', handleCnnCoverReady)
         intersectionObserver.disconnect()
         scrollTrigger.kill()
-        if (cnnPreloader) {
-          cnnPreloader.removeEventListener('loadedmetadata', handleCnnPreloadMetadata)
-          cnnPreloader.removeEventListener('seeked', handleCnnPreloadSeeked)
-          cnnPreloader.pause()
-          cnnPreloader.removeAttribute('src')
-          cnnPreloader.load()
-        }
         cancelAnimationFrame(seekFrame)
       }
     })
@@ -474,7 +448,7 @@ export function BookProjectJourney() {
             <video
               ref={bookVideoRef}
               className="book-film book-film-source"
-              poster="media/book-poster.jpg"
+              poster={projectMediaReady ? 'media/book-poster.jpg' : undefined}
               muted
               playsInline
               preload="none"
@@ -485,9 +459,9 @@ export function BookProjectJourney() {
               onError={() => setFilmFailed(true)}
             />
           )}
-          <img className="book-film book-film-poster" src="media/book-poster.jpg" alt="" aria-hidden="true" width="1280" height="720" loading="lazy" decoding="async" />
+          <img className="book-film book-film-poster" src={projectMediaReady ? 'media/book-poster.jpg' : undefined} alt="" aria-hidden="true" width="1280" height="720" loading="lazy" decoding="async" />
           <canvas ref={bookCanvasRef} className="book-film book-film-canvas" aria-hidden="true" />
-          <img ref={bookFreezeRef} className="book-film book-film-freeze" alt="" aria-hidden="true" width="1280" height="720" decoding="sync" />
+          <img ref={bookFreezeRef} className="book-film book-film-freeze" src={projectMediaReady ? 'media/book-cnn-cover.webp' : undefined} alt="" aria-hidden="true" width="1280" height="720" decoding="async" />
           <div className="book-shade" aria-hidden="true" />
           <div className="book-overlays">
             {projects.map((project, index) => (
@@ -495,6 +469,7 @@ export function BookProjectJourney() {
                 project={project}
                 index={index}
                 active={active === index}
+                mediaReady={projectMediaReady}
                 overlayRef={(node) => { overlayRefs.current[index] = node }}
                 key={project.id}
               />
@@ -507,11 +482,11 @@ export function BookProjectJourney() {
         </div>
       </div>
       <div className="mobile-book-intro">
-        <img src="media/book-poster.jpg" alt="Five technical books representing the selected portfolio projects" width="1280" height="720" loading="lazy" />
+        <img src={projectMediaReady ? 'media/book-poster.jpg' : undefined} alt="Five technical books representing the selected portfolio projects" width="1280" height="720" loading="lazy" />
       </div>
       <div className="mobile-project-list">
         {projects.map((project, index) => (
-          <ProjectDetails project={project} index={index} active mobile key={project.id} />
+          <ProjectDetails project={project} index={index} active mediaReady={projectMediaReady} mobile key={project.id} />
         ))}
       </div>
     </section>
