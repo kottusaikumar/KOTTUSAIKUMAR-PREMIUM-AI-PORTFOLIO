@@ -440,21 +440,28 @@ h2 { margin-bottom: 0; font-size: clamp(3.3rem, 7.2vw, 8.5rem); }
 .book-overlay-compact .page-scroll-rail { display: none; }
 .book-overlay-1 .project-detail-groups,
 .book-overlay-2 .project-detail-groups,
-.book-overlay-3 .project-detail-groups { grid-template-columns: minmax(0, 1fr); gap: .35rem; }
+.book-overlay-3 .project-detail-groups {
+  flex: 1 1 auto; grid-template-columns: minmax(0, 1fr); gap: .35rem; margin-top: .55rem; padding-top: .52rem;
+}
 .book-overlay-1 .project-detail-group ul,
 .book-overlay-2 .project-detail-group ul,
-.book-overlay-3 .project-detail-group ul { align-content: space-evenly; }
+.book-overlay-3 .project-detail-group ul { flex: 1 1 auto; align-content: space-evenly; gap: .25rem; }
 .book-overlay-1 .project-detail-group li,
 .book-overlay-2 .project-detail-group li,
-.book-overlay-3 .project-detail-group li { font-size: .64rem; line-height: 1.24; }
+.book-overlay-3 .project-detail-group li { font-size: .66rem; line-height: 1.27; }
+.book-overlay-1 .book-right-page h3,
+.book-overlay-2 .book-right-page h3,
+.book-overlay-3 .book-right-page h3 { font-size: clamp(1.5rem, 1.9vw, 2.1rem); line-height: .96; }
+.book-overlay-1 .project-description,
+.book-overlay-2 .project-description,
+.book-overlay-3 .project-description { font-size: .78rem; line-height: 1.35; }
 .book-overlay-1 .project-page-scroll,
 .book-overlay-2 .project-page-scroll,
-.book-overlay-3 .project-page-scroll { position: relative; padding-bottom: 2rem; }
+.book-overlay-3 .project-page-scroll { padding-bottom: clamp(.4rem, .7vw, .62rem); }
 .book-overlay-1 .project-links,
 .book-overlay-2 .project-links,
 .book-overlay-3 .project-links {
-  position: absolute; z-index: 2; right: .9rem; bottom: .5rem; left: .9rem; justify-content: flex-end;
-  margin: 0; padding-top: .3rem; background: linear-gradient(to bottom, transparent, rgb(244 240 229 / 96%) 35%);
+  position: static; justify-content: flex-start; margin: .45rem 0 3rem; padding-top: .38rem; background: none;
 }
 
 @media (min-width: 981px) and (max-width: 1150px) {
