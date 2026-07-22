@@ -38,15 +38,12 @@ const overlayWindows: OverlayWindow[] = [
   { enterStart: 0.952, enterEnd: 0.975 },
 ]
 
-const FILM_WIDTH = 1280
-const FILM_HEIGHT = 720
-
 const pageGeometry = [
-  { center: 49.7, width: 63.8, top: 7.8, bottom: 8.5 },
-  { center: 49.7, width: 62.3, top: 7.7, bottom: 8.7 },
-  { center: 49.7, width: 63.7, top: 7.5, bottom: 8.5 },
-  { center: 49.7, width: 51.0, top: 20.5, bottom: 14.5 },
-  { center: 49.7, width: 49.8, top: 23.5, bottom: 14.5 },
+  { center: '49.7%', width: '63.8%', top: '7.8%', bottom: '8.5%' },
+  { center: '49.7%', width: '62.3%', top: '7.7%', bottom: '8.7%' },
+  { center: '49.7%', width: '63.7%', top: '7.5%', bottom: '8.5%' },
+  { center: '49.7%', width: '51.0%', top: '20.5%', bottom: '14.5%' },
+  { center: '49.7%', width: '49.8%', top: '23.5%', bottom: '14.5%' },
 ] as const
 
 function clamp(value: number, min = 0, max = 1) {
@@ -203,10 +200,10 @@ function ProjectDetails({
 }) {
   const geometry = pageGeometry[index]
   const pageStyle = mobile ? undefined : ({
-    '--page-center': `${geometry.center}%`,
-    '--page-width': `${geometry.width}%`,
-    '--page-top': `${geometry.top}%`,
-    '--page-height': `${100 - geometry.top - geometry.bottom}%`,
+    '--page-center': geometry.center,
+    '--page-width': geometry.width,
+    '--page-top': geometry.top,
+    '--page-bottom': geometry.bottom,
   } as CSSProperties)
 
   const scrollRef = useRef<HTMLDivElement>(null)
@@ -323,68 +320,6 @@ export function BookProjectJourney() {
       let cnnCoverDecoded = freezeFrame.complete && freezeFrame.naturalWidth > 0
       let armed = false
       let seekFrame = 0
-      let layoutFrame = 0
-      const stage = section.querySelector<HTMLElement>('.book-stage')
-      if (!stage) return
-
-      const updateSceneLayout = () => {
-        layoutFrame = 0
-        const stageWidth = stage.clientWidth
-        const stageHeight = stage.clientHeight
-        if (!stageWidth || !stageHeight) return
-
-        const coverScale = Math.max(stageWidth / FILM_WIDTH, stageHeight / FILM_HEIGHT)
-        const renderedWidth = FILM_WIDTH * coverScale
-        const renderedHeight = FILM_HEIGHT * coverScale
-        const cropOffsetX = (stageWidth - renderedWidth) / 2
-        const cropOffsetY = (stageHeight - renderedHeight) / 2
-
-        // Ultra-wide browser viewports crop a 16:9 cover film vertically. Keep the
-        // overlaid project spread aligned to that crop, but uniformly scale and
-        // clamp it into the usable stage so headings, links, and the floating
-        // navigation never cover one another or leave the viewport.
-        const safeTop = clamp(stageHeight * 0.02, 12, 22)
-        const safeBottom = clamp(stageHeight * 0.12, 88, 112)
-        const safeSide = clamp(stageWidth * 0.018, 18, 34)
-        const usableHeight = stageHeight - safeTop - safeBottom
-        const usableWidth = stageWidth - (safeSide * 2)
-
-        overlayRefs.current.forEach((overlay, index) => {
-          if (!overlay) return
-          const geometry = pageGeometry[index]
-          const sourceHeight = 100 - geometry.top - geometry.bottom
-          const rawCenterX = cropOffsetX + (geometry.center / 100) * renderedWidth
-          const rawTop = cropOffsetY + (geometry.top / 100) * renderedHeight
-          const rawWidth = (geometry.width / 100) * renderedWidth
-          const rawHeight = (sourceHeight / 100) * renderedHeight
-          const fitScale = Math.min(1, usableWidth / rawWidth, usableHeight / rawHeight)
-          const pageWidth = rawWidth * fitScale
-          const pageHeight = rawHeight * fitScale
-          const rawCenterY = rawTop + (rawHeight / 2)
-          const pageCenterX = clamp(rawCenterX, safeSide + (pageWidth / 2), stageWidth - safeSide - (pageWidth / 2))
-          const pageCenterY = clamp(rawCenterY, safeTop + (pageHeight / 2), stageHeight - safeBottom - (pageHeight / 2))
-
-          overlay.style.setProperty('--page-center', `${pageCenterX}px`)
-          overlay.style.setProperty('--page-width', `${pageWidth}px`)
-          overlay.style.setProperty('--page-top', `${pageCenterY - (pageHeight / 2)}px`)
-          overlay.style.setProperty('--page-height', `${pageHeight}px`)
-        })
-
-        const sceneScale = Math.hypot(stageWidth, stageHeight)
-        const holdDistance = clamp(stageHeight * 0.7, 480, 760)
-        const travelDistance = clamp(sceneScale * 0.55, 480, 900)
-        const scrollDistance = (stageHeight * 1.6) + (projects.length * holdDistance) + ((projects.length - 1) * travelDistance)
-        section.style.setProperty('--book-scroll-distance', `${Math.round(scrollDistance)}px`)
-      }
-
-      const scheduleLayout = () => {
-        if (!layoutFrame) layoutFrame = requestAnimationFrame(updateSceneLayout)
-      }
-
-      const resizeObserver = new ResizeObserver(scheduleLayout)
-      resizeObserver.observe(stage)
-      window.visualViewport?.addEventListener('resize', scheduleLayout)
-      updateSceneLayout()
 
       const handleCnnCoverReady = () => {
         cnnCoverDecoded = true
@@ -476,7 +411,6 @@ export function BookProjectJourney() {
         trigger: section,
         start: 'top top',
         end: 'bottom bottom',
-        invalidateOnRefresh: true,
         onUpdate: (self) => {
           const progress = self.progress
           progressRef.current = progress
@@ -502,11 +436,8 @@ export function BookProjectJourney() {
         video.removeEventListener('loadeddata', paintFrame)
         freezeFrame.removeEventListener('load', handleCnnCoverReady)
         intersectionObserver.disconnect()
-        resizeObserver.disconnect()
-        window.visualViewport?.removeEventListener('resize', scheduleLayout)
         scrollTrigger.kill()
         cancelAnimationFrame(seekFrame)
-        cancelAnimationFrame(layoutFrame)
       }
     })
 

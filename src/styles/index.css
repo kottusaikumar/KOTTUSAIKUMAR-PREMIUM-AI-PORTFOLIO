@@ -391,7 +391,7 @@ h2 { margin-bottom: 0; font-size: clamp(3.2rem, 2.1rem + 5.3vw, 8.5rem); }
 }
 
 /* Book journey */
-.book-journey { --shelf-progress: 0; --heading-opacity: 1; --book-scroll-distance: 540rem; position: relative; height: calc(100svh + var(--book-scroll-distance)); color: var(--white); background: #071d19; }
+.book-journey { --shelf-progress: 0; --heading-opacity: 1; position: relative; height: 980vh; color: var(--white); background: #071d19; }
 .book-sticky { position: sticky; top: 0; height: 100svh; min-height: 0; overflow: hidden; isolation: isolate; }
 .book-heading { position: absolute; z-index: 7; top: clamp(1.2rem, 2.5vh, 2rem); left: var(--gutter); max-width: min(52rem, 64vw); opacity: var(--heading-opacity); transform: translateY(calc((1 - var(--heading-opacity)) * -18px)); pointer-events: none; will-change: transform, opacity; }
 .book-heading .eyebrow { margin-bottom: .45rem; }
@@ -404,7 +404,7 @@ h2 { margin-bottom: 0; font-size: clamp(3.2rem, 2.1rem + 5.3vw, 8.5rem); }
 .book-film-freeze { opacity: 0; pointer-events: none; }
 .book-shade { position: absolute; inset: 0; background: linear-gradient(to bottom, rgb(3 13 12 / 48%) 0, transparent 26%, transparent 70%, rgb(3 13 12 / 66%) 100%), linear-gradient(90deg, rgb(3 13 12 / 18%), transparent 28%, transparent 72%, rgb(3 13 12 / 16%)); pointer-events: none; }
 .book-overlays { position: absolute; inset: 0; z-index: 5; perspective: 1400px; pointer-events: none; }
-.book-overlay { position: absolute; top: var(--page-top); left: var(--page-center); width: var(--page-width); height: var(--page-height); display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 0; color: var(--ink); opacity: 0; visibility: hidden; transform: translate3d(-50%, 12px, 0) scale(.88); transform-origin: 50% 58%; will-change: transform, opacity; }
+.book-overlay { position: absolute; top: var(--page-top); bottom: var(--page-bottom); left: var(--page-center); width: var(--page-width); display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 0; color: var(--ink); opacity: 0; visibility: hidden; transform: translate3d(-50%, 12px, 0) scale(.88); transform-origin: 50% 58%; will-change: transform, opacity; }
 .book-left-page, .book-right-page { min-width: 0; min-height: 0; overflow: hidden; background: rgb(244 240 229 / 94%); }
 .book-left-page { position: relative; display: grid; padding: clamp(.48rem, .72vw, .72rem); border-radius: .18rem .55rem .55rem .25rem; transform: perspective(1400px) rotateY(1.2deg); clip-path: polygon(1.5% 1.5%, 100% 0, 98.8% 100%, 0 98.2%); }
 .project-media-label { position: absolute; z-index: 2; top: 1.3rem; right: 1.45rem; left: 1.45rem; display: flex; justify-content: space-between; color: var(--green-deep); font-size: .56rem; font-weight: 700; letter-spacing: .13em; text-transform: uppercase; pointer-events: none; }
@@ -448,7 +448,7 @@ h2 { margin-bottom: 0; font-size: clamp(3.2rem, 2.1rem + 5.3vw, 8.5rem); }
 .page-scroll-rail.is-idle { opacity: .18; }
 .page-scroll-rail.is-hidden { opacity: 0; }
 .page-scroll-thumb { position: absolute; left: 0; width: 100%; min-height: 10%; border-radius: 999px; background: var(--green-deep); }
-.book-overlay-compact .project-page-scroll { overflow-x: hidden; overflow-y: auto; padding: clamp(.4rem, .7vw, .62rem) clamp(.62rem, 1vw, .9rem); }
+.book-overlay-compact .project-page-scroll { overflow: hidden; padding: clamp(.4rem, .7vw, .62rem) clamp(.62rem, 1vw, .9rem); }
 .book-overlay-compact .project-number { margin-bottom: .32rem; font-size: .58rem; }
 .book-overlay-compact .book-right-page h3 { margin-bottom: .25rem; font-size: clamp(1.35rem, 1.75vw, 1.85rem); }
 .book-overlay-compact .project-description { font-size: clamp(.68rem, .7vw, .76rem); line-height: 1.32; }
@@ -465,6 +465,7 @@ h2 { margin-bottom: 0; font-size: clamp(3.2rem, 2.1rem + 5.3vw, 8.5rem); }
 .book-overlay-compact .project-links { margin-top: auto; padding-top: .2rem; }
 .book-overlay-compact .project-links a { font-size: .68rem; }
 .book-overlay-compact .project-media-label { top: .8rem; right: .9rem; left: .9rem; font-size: .45rem; }
+.book-overlay-compact .page-scroll-rail { display: none; }
 .book-overlay-1 .project-detail-groups,
 .book-overlay-2 .project-detail-groups,
 .book-overlay-3 .project-detail-groups {
