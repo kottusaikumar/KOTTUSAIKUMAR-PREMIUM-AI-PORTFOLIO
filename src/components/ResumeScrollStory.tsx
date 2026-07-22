@@ -62,7 +62,7 @@ export function ResumeScrollStory() {
   )
 
   useEffect(() => {
-    if (reducedMotion) {
+    if (reducedMotion || !cinematicViewport) {
       setAuxiliaryMediaReady(false)
       return
     }
@@ -118,7 +118,7 @@ export function ResumeScrollStory() {
       if (idleId) window.cancelIdleCallback(idleId)
       if (fallbackId) window.clearTimeout(fallbackId)
     }
-  }, [frames, reducedMotion])
+  }, [cinematicViewport, frames, reducedMotion])
 
   useEffect(() => {
     const section = sectionRef.current
@@ -129,7 +129,7 @@ export function ResumeScrollStory() {
     const shadow = shadowRef.current
     const progressLine = progressRef.current
     const phase = phaseRef.current
-    if (!section || !sticky || !card || !paper || !ball || !shadow || !progressLine || !phase || reducedMotion) return
+    if (!section || !sticky || !card || !paper || !ball || !shadow || !progressLine || !phase || reducedMotion || !cinematicViewport) return
 
     const back = section.querySelector<HTMLElement>('.resume-paper-back')
     const desk = section.querySelector<HTMLElement>('.resume-desk-scene')
@@ -265,11 +265,11 @@ export function ResumeScrollStory() {
     updateFrame()
     requestAnimationFrame(() => ScrollTrigger.refresh())
     return () => context.revert()
-  }, [frames, reducedMotion])
+  }, [cinematicViewport, frames, reducedMotion])
 
   if (reducedMotion || !cinematicViewport) {
     return (
-      <section className="resume-story reduced" aria-labelledby="resume-story-title">
+      <section key="resume-flow" className="resume-story reduced" aria-labelledby="resume-story-title">
         <div className="resume-reduced-shell">
           <header className="resume-reduced-header">
             <p>01 / SOURCE DOCUMENT</p>
@@ -303,7 +303,7 @@ export function ResumeScrollStory() {
   }
 
   return (
-    <section ref={sectionRef} className={`resume-story${reducedMotion ? ' reduced' : ''}`} aria-labelledby="resume-story-title">
+    <section key="resume-cinematic" ref={sectionRef} className={`resume-story${reducedMotion ? ' reduced' : ''}`} aria-labelledby="resume-story-title">
       <div ref={stickyRef} className="resume-story-sticky">
         <div className="resume-desk-scene" aria-hidden="true">
           <div className="resume-cutting-mat" />
