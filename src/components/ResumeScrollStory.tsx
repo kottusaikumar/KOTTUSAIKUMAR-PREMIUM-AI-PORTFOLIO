@@ -19,7 +19,7 @@ import { RESUME_CINEMATIC_QUERY } from '../config/responsive'
 gsap.registerPlugin(ScrollTrigger)
 
 const FRAME_COUNT = 30
-const RESUME_MOBILE_ANIMATION_QUERY = '(max-width: 767px), (max-width: 900px) and (max-height: 500px)'
+const RESUME_PHONE_FULL_QUERY = '(max-width: 767px), (max-width: 900px) and (max-height: 500px)'
 
 const technologyMarks = [
   { name: 'Python', position: 'python', icon: siPython },
@@ -54,14 +54,10 @@ export function ResumeScrollStory() {
   const shadowRef = useRef<HTMLSpanElement>(null)
   const progressRef = useRef<HTMLSpanElement>(null)
   const phaseRef = useRef<HTMLSpanElement>(null)
-  const mobileSectionRef = useRef<HTMLElement>(null)
-  const mobileCardRef = useRef<HTMLDivElement>(null)
-  const mobileBallRef = useRef<HTMLImageElement>(null)
-  const mobileMessageRef = useRef<HTMLDivElement>(null)
-  const mobileProgressRef = useRef<HTMLSpanElement>(null)
   const reducedMotion = useReducedMotion()
   const cinematicViewport = useMediaQuery(RESUME_CINEMATIC_QUERY)
-  const mobileAnimatedViewport = useMediaQuery(RESUME_MOBILE_ANIMATION_QUERY)
+  const phoneFullViewport = useMediaQuery(RESUME_PHONE_FULL_QUERY)
+  const fullAnimationViewport = cinematicViewport || phoneFullViewport
   const [auxiliaryMediaReady, setAuxiliaryMediaReady] = useState(false)
   const frames = useMemo(
     () => Array.from({ length: FRAME_COUNT }, (_, index) => `resume-scroll/frames/resume-${String(index).padStart(2, '0')}.webp`),
@@ -69,7 +65,7 @@ export function ResumeScrollStory() {
   )
 
   useEffect(() => {
-    if (reducedMotion || !cinematicViewport) {
+    if (reducedMotion || !fullAnimationViewport) {
       setAuxiliaryMediaReady(false)
       return
     }
@@ -125,7 +121,7 @@ export function ResumeScrollStory() {
       if (idleId) window.cancelIdleCallback(idleId)
       if (fallbackId) window.clearTimeout(fallbackId)
     }
-  }, [cinematicViewport, frames, reducedMotion])
+  }, [cinematicViewport, frames, fullAnimationViewport, phoneFullViewport, reducedMotion])
 
   useEffect(() => {
     const section = sectionRef.current
@@ -136,7 +132,7 @@ export function ResumeScrollStory() {
     const shadow = shadowRef.current
     const progressLine = progressRef.current
     const phase = phaseRef.current
-    if (!section || !sticky || !card || !paper || !ball || !shadow || !progressLine || !phase || reducedMotion || !cinematicViewport) return
+    if (!section || !sticky || !card || !paper || !ball || !shadow || !progressLine || !phase || reducedMotion || !fullAnimationViewport) return
 
     const back = section.querySelector<HTMLElement>('.resume-paper-back')
     const desk = section.querySelector<HTMLElement>('.resume-desk-scene')
@@ -272,104 +268,9 @@ export function ResumeScrollStory() {
     updateFrame()
     requestAnimationFrame(() => ScrollTrigger.refresh())
     return () => context.revert()
-  }, [cinematicViewport, frames, reducedMotion])
+  }, [cinematicViewport, frames, fullAnimationViewport, phoneFullViewport, reducedMotion])
 
-  useEffect(() => {
-    const section = mobileSectionRef.current
-    const card = mobileCardRef.current
-    const ball = mobileBallRef.current
-    const message = mobileMessageRef.current
-    const progress = mobileProgressRef.current
-    if (!section || !card || !ball || !message || !progress || cinematicViewport || !mobileAnimatedViewport || reducedMotion) return
-
-    const context = gsap.context(() => {
-      gsap.set(card, { yPercent: 14, rotation: -4, scale: 0.9, opacity: 1 })
-      gsap.set(ball, { x: 0, y: '7vh', rotation: -12, scale: 0.55, opacity: 0 })
-      gsap.set(message, { y: 24, opacity: 0 })
-
-      const timeline = gsap.timeline({ paused: true, defaults: { ease: 'none' } })
-      timeline
-        .to(card, { yPercent: 0, rotation: 0, scale: 1, duration: 1, ease: 'power3.out' })
-        .to(card, { rotation: 2, scale: 0.92, duration: 0.55, ease: 'power2.inOut' })
-        .to(card, { rotation: 10, scale: 0.58, opacity: 0, duration: 0.38, ease: 'power2.in' })
-        .to(ball, { y: 0, rotation: 12, scale: 1, opacity: 1, duration: 0.48, ease: 'power3.out' }, '<-=0.08')
-        .to(ball, { x: '22vw', y: '18vh', rotation: 42, scale: 0.74, opacity: 0.42, duration: 0.62, ease: 'power2.inOut' })
-        .to(message, { y: 0, opacity: 1, duration: 0.62, ease: 'power3.out' }, '-=0.35')
-        .to({}, { duration: 0.75 })
-
-      const trigger = ScrollTrigger.create({
-        trigger: section,
-        start: 'top top',
-        end: 'bottom bottom',
-        animation: timeline,
-        scrub: 0.2,
-        invalidateOnRefresh: true,
-        onUpdate: (self) => {
-          progress.style.transform = `scaleX(${self.progress})`
-        },
-      })
-
-      return () => {
-        trigger.kill()
-        timeline.kill()
-      }
-    }, section)
-
-    requestAnimationFrame(() => ScrollTrigger.refresh())
-    return () => context.revert()
-  }, [cinematicViewport, mobileAnimatedViewport, reducedMotion])
-
-  if (!cinematicViewport && mobileAnimatedViewport && !reducedMotion) {
-    return (
-      <section key="resume-mobile-animation" ref={mobileSectionRef} className="resume-story mobile-animated" aria-labelledby="resume-story-title">
-        <div className="resume-mobile-sticky">
-          <div className="resume-mobile-mat" aria-hidden="true" />
-          <header className="resume-mobile-header">
-            <p>01 / SOURCE DOCUMENT</p>
-            <h2 id="resume-story-title">The work begins with the <em>record.</em></h2>
-          </header>
-          <div className="resume-mobile-stage">
-            <div ref={mobileCardRef} className="resume-mobile-card">
-              <img
-                src="resume-scroll/responsive/resume-00-480.webp"
-                srcSet="resume-scroll/responsive/resume-00-480.webp 480w, resume-scroll/responsive/resume-00-720.webp 720w"
-                sizes="76vw"
-                alt="Kottu Saikumar's resume"
-                width="1000"
-                height="1415"
-                fetchPriority="high"
-                decoding="sync"
-              />
-            </div>
-            <img
-              ref={mobileBallRef}
-              className="resume-mobile-ball"
-              src="resume-scroll/responsive/resume-ball-240.webp"
-              srcSet="resume-scroll/responsive/resume-ball-240.webp 240w, resume-scroll/responsive/resume-ball-360.webp 360w"
-              sizes="11rem"
-              alt=""
-              width="483"
-              height="425"
-              decoding="async"
-            />
-            <div ref={mobileMessageRef} className="resume-mobile-message">
-              <h3><span>Research.</span><span>Build.</span><span>Deploy.</span></h3>
-              <p>AI systems built for real problems</p>
-              <a href={personal.resume} target="_blank" rel="noreferrer">
-                Read resume <span aria-hidden="true">↗</span>
-              </a>
-            </div>
-          </div>
-          <div className="resume-mobile-footer" aria-hidden="true">
-            <span>Scroll the record</span>
-            <i><span ref={mobileProgressRef} /></i>
-          </div>
-        </div>
-      </section>
-    )
-  }
-
-  if (reducedMotion || !cinematicViewport) {
+  if (reducedMotion || !fullAnimationViewport) {
     return (
       <section key="resume-flow" className="resume-story reduced" aria-labelledby="resume-story-title">
         <div className="resume-reduced-shell">
@@ -405,7 +306,12 @@ export function ResumeScrollStory() {
   }
 
   return (
-    <section key="resume-cinematic" ref={sectionRef} className={`resume-story${reducedMotion ? ' reduced' : ''}`} aria-labelledby="resume-story-title">
+    <section
+      key={cinematicViewport ? 'resume-cinematic' : 'resume-phone-full'}
+      ref={sectionRef}
+      className={`resume-story${phoneFullViewport && !cinematicViewport ? ' phone-full-animation' : ''}`}
+      aria-labelledby="resume-story-title"
+    >
       <div ref={stickyRef} className="resume-story-sticky">
         <div className="resume-desk-scene" aria-hidden="true">
           <div className="resume-cutting-mat" />
