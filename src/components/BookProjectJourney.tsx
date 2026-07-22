@@ -273,7 +273,7 @@ function ProjectDetails({
   )
 }
 
-export function BookProjectJourney() {
+function DesktopBookProjectJourney() {
   const sectionRef = useRef<HTMLElement>(null)
   const bookVideoRef = useRef<HTMLVideoElement>(null)
   const bookCanvasRef = useRef<HTMLCanvasElement>(null)
@@ -285,7 +285,6 @@ export function BookProjectJourney() {
   const [active, setActive] = useState(-1)
   const [filmFailed, setFilmFailed] = useState(false)
   const [projectMediaReady, setProjectMediaReady] = useState(false)
-  const [mobileVideoId, setMobileVideoId] = useState<string | null>(null)
   const reducedMotion = useReducedMotion()
   const cinematicViewport = useMediaQuery(BOOK_CINEMATIC_QUERY)
 
@@ -497,23 +496,66 @@ export function BookProjectJourney() {
           </div>
         </div>
       </div>
-      <div className="mobile-book-intro">
-        <img src={projectMediaReady ? 'media/book-poster.jpg' : undefined} alt="Five technical books representing the selected portfolio projects" width="1280" height="720" loading="lazy" />
+    </section>
+  )
+}
+
+function MobileProjectCard({
+  project,
+  activeVideoId,
+  onVideoActivate,
+}: {
+  project: Project
+  activeVideoId: string | null
+  onVideoActivate: (id: string) => void
+}) {
+  return (
+    <article className="mobile-project-card">
+      <ProjectVideo
+        project={project}
+        active
+        mediaReady
+        controls
+        mobilePreview
+        mobileActive={activeVideoId === project.id}
+        onMobileActivate={() => onVideoActivate(project.id)}
+      />
+      <div className="mobile-project-copy">
+        <h3>{project.title}</h3>
+        <p>{project.description}</p>
       </div>
+    </article>
+  )
+}
+
+function MobileProjectsJourney() {
+  const [activeVideoId, setActiveVideoId] = useState<string | null>(null)
+
+  return (
+    <section className="book-journey mobile-project-journey" id="projects" aria-labelledby="projects-title">
+      <header className="book-heading">
+        <p className="eyebrow">04 / Tangibility</p>
+        <h2 id="projects-title">Five projects. <em>Built for real use.</em></h2>
+      </header>
       <div className="mobile-project-list">
-        {projects.map((project, index) => (
-          <ProjectDetails
+        {projects.map((project) => (
+          <MobileProjectCard
             project={project}
-            index={index}
-            active
-            mediaReady={projectMediaReady}
-            mobile
-            mobileVideoActive={mobileVideoId === project.id}
-            onMobileVideoActivate={() => setMobileVideoId(project.id)}
+            activeVideoId={activeVideoId}
+            onVideoActivate={setActiveVideoId}
             key={project.id}
           />
         ))}
       </div>
     </section>
   )
+}
+
+export function BookProjectJourney() {
+  const cinematicViewport = useMediaQuery(BOOK_CINEMATIC_QUERY)
+  const reducedMotion = useReducedMotion()
+
+  return cinematicViewport && !reducedMotion
+    ? <DesktopBookProjectJourney />
+    : <MobileProjectsJourney />
 }

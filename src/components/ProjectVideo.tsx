@@ -41,6 +41,12 @@ export function ProjectVideo({
   }, [mobileActive, mobilePreview])
 
   useEffect(() => {
+    const video = ref.current
+    if (!video || !mobilePreview || !requested || !mobileActive) return
+    video.play().catch(() => undefined)
+  }, [mobileActive, mobilePreview, requested])
+
+  useEffect(() => {
     if (!mobilePreview) return
     const pauseWhenHidden = () => {
       if (document.hidden) ref.current?.pause()
@@ -50,25 +56,19 @@ export function ProjectVideo({
   }, [mobilePreview])
 
   const activateMobilePreview = () => {
-    const video = ref.current
-    if (!video || !mediaReady) return
+    if (!mediaReady) return
     onMobileActivate?.()
-    if (!requested) {
-      video.src = project.video
-      video.load()
-      setRequested(true)
-    }
-    video.play().catch(() => undefined)
+    setRequested(true)
   }
 
   if (failed) return <MediaErrorFallback label={project.title} />
 
-  const video = (
+  const video = requested || !mobilePreview ? (
     <video
       ref={ref}
       className="project-video"
-      src={!mobilePreview && mediaReady ? project.video : undefined}
-      poster={mediaReady ? project.poster : undefined}
+      src={mediaReady ? project.video : undefined}
+      poster={project.poster}
       muted
       loop
       playsInline
@@ -78,17 +78,27 @@ export function ProjectVideo({
       onPlay={mobilePreview ? onMobileActivate : undefined}
       onError={() => setFailed(true)}
     />
-  )
+  ) : null
 
   if (!mobilePreview) return video
 
   return (
     <div className={`project-preview${requested ? ' is-requested' : ''}`}>
-      {video}
+      {requested ? video : (
+        <img
+          className="project-preview-poster"
+          src={project.poster}
+          alt=""
+          width="1280"
+          height="720"
+          loading="lazy"
+          decoding="async"
+        />
+      )}
       {!requested && (
         <button className="project-preview-button" type="button" onClick={activateMobilePreview} disabled={!mediaReady}>
           <span aria-hidden="true">▶</span>
-          {mediaReady ? 'Play preview' : 'Loading preview'}
+          {mediaReady ? 'Watch demo' : 'Loading preview'}
         </button>
       )}
     </div>
