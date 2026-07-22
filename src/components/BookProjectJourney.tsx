@@ -339,14 +339,35 @@ export function BookProjectJourney() {
         const cropOffsetX = (stageWidth - renderedWidth) / 2
         const cropOffsetY = (stageHeight - renderedHeight) / 2
 
+        // Ultra-wide browser viewports crop a 16:9 cover film vertically. Keep the
+        // overlaid project spread aligned to that crop, but uniformly scale and
+        // clamp it into the usable stage so headings, links, and the floating
+        // navigation never cover one another or leave the viewport.
+        const safeTop = clamp(stageHeight * 0.02, 12, 22)
+        const safeBottom = clamp(stageHeight * 0.12, 88, 112)
+        const safeSide = clamp(stageWidth * 0.018, 18, 34)
+        const usableHeight = stageHeight - safeTop - safeBottom
+        const usableWidth = stageWidth - (safeSide * 2)
+
         overlayRefs.current.forEach((overlay, index) => {
           if (!overlay) return
           const geometry = pageGeometry[index]
           const sourceHeight = 100 - geometry.top - geometry.bottom
-          overlay.style.setProperty('--page-center', `${cropOffsetX + (geometry.center / 100) * renderedWidth}px`)
-          overlay.style.setProperty('--page-width', `${(geometry.width / 100) * renderedWidth}px`)
-          overlay.style.setProperty('--page-top', `${cropOffsetY + (geometry.top / 100) * renderedHeight}px`)
-          overlay.style.setProperty('--page-height', `${(sourceHeight / 100) * renderedHeight}px`)
+          const rawCenterX = cropOffsetX + (geometry.center / 100) * renderedWidth
+          const rawTop = cropOffsetY + (geometry.top / 100) * renderedHeight
+          const rawWidth = (geometry.width / 100) * renderedWidth
+          const rawHeight = (sourceHeight / 100) * renderedHeight
+          const fitScale = Math.min(1, usableWidth / rawWidth, usableHeight / rawHeight)
+          const pageWidth = rawWidth * fitScale
+          const pageHeight = rawHeight * fitScale
+          const rawCenterY = rawTop + (rawHeight / 2)
+          const pageCenterX = clamp(rawCenterX, safeSide + (pageWidth / 2), stageWidth - safeSide - (pageWidth / 2))
+          const pageCenterY = clamp(rawCenterY, safeTop + (pageHeight / 2), stageHeight - safeBottom - (pageHeight / 2))
+
+          overlay.style.setProperty('--page-center', `${pageCenterX}px`)
+          overlay.style.setProperty('--page-width', `${pageWidth}px`)
+          overlay.style.setProperty('--page-top', `${pageCenterY - (pageHeight / 2)}px`)
+          overlay.style.setProperty('--page-height', `${pageHeight}px`)
         })
 
         const sceneScale = Math.hypot(stageWidth, stageHeight)
