@@ -1,0 +1,24 @@
+# Kottu Saikumar
+
+> Full-Stack AI Developer in Hyderabad, India. Builds RAG systems, machine-learning pipelines, computer-vision applications, analytics, and accessible interfaces.
+
+Website: https://kottusaikumar.github.io/KOTTUSAIKUMAR-PREMIUM-AI-PORTFOLIO/
+
+## Portfolio sections
+
+- About: professional profile and current focus
+- Capabilities: languages, AI/ML, data, backend, frontend, and developer tools
+- Experience: Vajra.ai experience, selected projects, and education
+- Projects: five technical case studies with implementation details and measured outcomes
+- Process: engineering workflow from discovery through delivery
+- Evidence: concise, measurable results
+- Contact: public professional links and portfolio assistant
+
+## Public profiles
+
+- GitHub: https://github.com/kottusaikumar
+- LinkedIn: https://www.linkedin.com/in/sai-kumar-10541b269
+- X: https://x.com/433Saikumar
+- Email: mailto:kottusaikumar2003@gmail.com
+
+The interactive portfolio assistant answers only from verified portfolio data. All primary content remains available as semantic HTML.
