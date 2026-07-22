@@ -22,6 +22,7 @@ export function ProjectVideo({
   const ref = useRef<HTMLVideoElement>(null)
   const [failed, setFailed] = useState(false)
   const [requested, setRequested] = useState(false)
+  const [playing, setPlaying] = useState(false)
 
   useEffect(() => {
     const video = ref.current
@@ -61,6 +62,22 @@ export function ProjectVideo({
     setRequested(true)
   }
 
+  const toggleMobilePreview = () => {
+    if (!requested) {
+      activateMobilePreview()
+      return
+    }
+
+    const video = ref.current
+    if (!video) return
+    if (video.paused) {
+      onMobileActivate?.()
+      video.play().catch(() => undefined)
+    } else {
+      video.pause()
+    }
+  }
+
   if (failed) return <MediaErrorFallback label={project.title} />
 
   const video = requested || !mobilePreview ? (
@@ -72,10 +89,14 @@ export function ProjectVideo({
       muted
       loop
       playsInline
-      controls={controls && (!mobilePreview || requested)}
+      controls={controls && !mobilePreview}
       preload="none"
       aria-label={`${project.title} demonstration`}
-      onPlay={mobilePreview ? onMobileActivate : undefined}
+      onPlay={mobilePreview ? () => {
+        setPlaying(true)
+        onMobileActivate?.()
+      } : undefined}
+      onPause={mobilePreview ? () => setPlaying(false) : undefined}
       onError={() => setFailed(true)}
     />
   ) : null
@@ -95,12 +116,15 @@ export function ProjectVideo({
           decoding="async"
         />
       )}
-      {!requested && (
-        <button className="project-preview-button" type="button" onClick={activateMobilePreview} disabled={!mediaReady}>
-          <span aria-hidden="true">▶</span>
-          {mediaReady ? 'Watch demo' : 'Loading preview'}
-        </button>
-      )}
+      <button
+        className="project-preview-button is-icon"
+        type="button"
+        onClick={toggleMobilePreview}
+        disabled={!mediaReady}
+        aria-label={`${playing ? 'Pause' : 'Play'} ${project.title} preview`}
+      >
+        <span aria-hidden="true">{playing ? '❚❚' : '▶'}</span>
+      </button>
     </div>
   )
 }

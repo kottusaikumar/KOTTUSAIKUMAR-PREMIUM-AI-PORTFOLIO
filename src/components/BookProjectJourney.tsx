@@ -523,6 +523,9 @@ function MobileProjectCard({
       <div className="mobile-project-copy">
         <h3>{project.title}</h3>
         <p>{project.description}</p>
+        <a className="mobile-project-source" href={project.github} target="_blank" rel="noreferrer">
+          View source <span aria-hidden="true">↗</span>
+        </a>
       </div>
     </article>
   )
