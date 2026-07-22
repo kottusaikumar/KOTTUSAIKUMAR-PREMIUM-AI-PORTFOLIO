@@ -354,7 +354,7 @@ h2 { margin-bottom: 0; font-size: clamp(3.2rem, 2.1rem + 5.3vw, 8.5rem); }
 .education-meta { display: flex; flex-wrap: wrap; justify-content: space-between; gap: .6rem 1rem; margin-top: .8rem; color: var(--green-deep); font-size: .76rem; }
 .education-meta strong { font-weight: 750; }
 
-@media (min-width: 1101px) and (min-height: 740px) and (min-aspect-ratio: 1.334 / 1) {
+@media (min-width: 1101px) and (min-height: 690px) and (min-aspect-ratio: 1.334 / 1) {
   .experience-stage { height: min(86svh, 55rem); min-height: min(44rem, 86svh); display: grid; grid-template-rows: auto auto minmax(0, 1fr) auto; }
   .experience-stage .experience-company-header { padding: 1.05rem 1.4rem; }
   .experience-stage .experience-company-identity img { width: 52px; height: 52px; border-radius: .8rem; }
@@ -679,7 +679,7 @@ h2 { margin-bottom: 0; font-size: clamp(3.2rem, 2.1rem + 5.3vw, 8.5rem); }
   .experience-layout { width: min(100%, 86rem); grid-template-columns: minmax(20rem, .62fr) minmax(0, 1.38fr); gap: 2.5rem; }
   .experience-heading h2 { font-size: clamp(4.4rem, 4.75vw, 5.6rem); }
   .experience-heading-note { max-width: 25rem; font-size: 1.15rem; }
-  .experience-stage { height: min(82svh, 46rem); min-height: 42rem; }
+  .experience-stage { height: min(82svh, 46rem); min-height: min(42rem, 86svh); }
   .experience-stage .experience-company-header { padding: .78rem 1.05rem; }
   .experience-stage .experience-company-identity img { width: 44px; height: 44px; }
   .experience-stage .experience-company-identity h3 { font-size: clamp(1.8rem, 2vw, 2.2rem); }
@@ -733,11 +733,11 @@ h2 { margin-bottom: 0; font-size: clamp(3.2rem, 2.1rem + 5.3vw, 8.5rem); }
   .site-footer { margin-top: 2.5rem; padding-top: 1.2rem; }
 }
 
-@media (min-width: 1101px) and (max-height: 739px) {
+@media (min-width: 1101px) and (max-height: 689px) {
   .experience-stage { height: auto; min-height: 0; display: block; }
 }
 
-@media (max-height: 699px) {
+@media (max-height: 679px) {
   .portrait-frame { position: relative; top: auto; }
 }
 
@@ -757,7 +757,7 @@ h2 { margin-bottom: 0; font-size: clamp(3.2rem, 2.1rem + 5.3vw, 8.5rem); }
   .process-step:nth-child(-n+2) { border-bottom: 1px solid #bdb5a7; }
 }
 
-@media (max-width: 1099px), (max-height: 699px), (max-aspect-ratio: 4 / 3) {
+@media (max-width: 1099px), (max-height: 679px), (max-aspect-ratio: 4 / 3) {
   .resume-story { height: 690svh; }
   .resume-story-message { width: min(62vw, 40rem); }
   .resume-story-message h2 { font-size: clamp(3.6rem, 9vw, 6.8rem); }
@@ -789,7 +789,7 @@ h2 { margin-bottom: 0; font-size: clamp(3.2rem, 2.1rem + 5.3vw, 8.5rem); }
   .mobile-project .project-page-scroll { height: auto; overflow: visible; padding: 1.5rem; scrollbar-gutter: auto; pointer-events: auto; }
 }
 
-@media (min-width: 901px) and (max-width: 1099px), (min-width: 901px) and (max-height: 699px), (min-width: 901px) and (max-aspect-ratio: 4 / 3) {
+@media (min-width: 901px) and (max-width: 1099px), (min-width: 901px) and (max-height: 679px), (min-width: 901px) and (max-aspect-ratio: 4 / 3) {
   .proof-section { min-height: auto; padding-block: 7rem 9rem; overflow: hidden; }
   .proof-sticky { height: auto; min-height: 0; overflow: visible; }
   .proof-page { position: relative; inset: auto; overflow: visible; }
