@@ -2,6 +2,8 @@
 
 A production-ready, editable React + TypeScript + Vite portfolio rebuilt from the supplied distribution and original media. It uses GSAP ScrollTrigger and Lenis for a cinematic, reversible desktop experience while preserving a semantic mobile and reduced-motion path.
 
+**Live portfolio:** [https://kottusaikumar.github.io/KOTTUSAIKUMAR-PREMIUM-AI-PORTFOLIO/](https://kottusaikumar.github.io/KOTTUSAIKUMAR-PREMIUM-AI-PORTFOLIO/)
+
 ## Highlights
 
 - `PORTFOLIO` O portal into the scroll-controlled résumé story.
