@@ -6,6 +6,8 @@ import type { Project } from '../types/portfolio'
 import { useReducedMotion } from '../hooks/useReducedMotion'
 import { ProjectVideo } from './ProjectVideo'
 import { MediaErrorFallback } from './MediaErrorFallback'
+import { BOOK_CINEMATIC_QUERY } from '../config/responsive'
+import { useMediaQuery } from '../hooks/useMediaQuery'
 
 const filmTimeline: Array<[number, number]> = [
   [0, 0], [0.075, 5], [0.135, 9], [0.17, 9], [0.18, 10.4], [0.28, 10.4],
@@ -36,12 +38,15 @@ const overlayWindows: OverlayWindow[] = [
   { enterStart: 0.952, enterEnd: 0.975 },
 ]
 
+const FILM_WIDTH = 1280
+const FILM_HEIGHT = 720
+
 const pageGeometry = [
-  { center: '49.7%', width: '63.8%', top: '7.8%', bottom: '8.5%' },
-  { center: '49.7%', width: '62.3%', top: '7.7%', bottom: '8.7%' },
-  { center: '49.7%', width: '63.7%', top: '7.5%', bottom: '8.5%' },
-  { center: '49.7%', width: '51.0%', top: '20.5%', bottom: '14.5%' },
-  { center: '49.7%', width: '49.8%', top: '23.5%', bottom: '14.5%' },
+  { center: 49.7, width: 63.8, top: 7.8, bottom: 8.5 },
+  { center: 49.7, width: 62.3, top: 7.7, bottom: 8.7 },
+  { center: 49.7, width: 63.7, top: 7.5, bottom: 8.5 },
+  { center: 49.7, width: 51.0, top: 20.5, bottom: 14.5 },
+  { center: 49.7, width: 49.8, top: 23.5, bottom: 14.5 },
 ] as const
 
 function clamp(value: number, min = 0, max = 1) {
@@ -184,6 +189,8 @@ function ProjectDetails({
   mediaReady,
   overlayRef,
   index = 0,
+  mobileVideoActive = false,
+  onMobileVideoActivate,
 }: {
   project: Project
   active: boolean
@@ -191,13 +198,15 @@ function ProjectDetails({
   mediaReady: boolean
   overlayRef?: (node: HTMLElement | null) => void
   index?: number
+  mobileVideoActive?: boolean
+  onMobileVideoActivate?: () => void
 }) {
   const geometry = pageGeometry[index]
   const pageStyle = mobile ? undefined : ({
-    '--page-center': geometry.center,
-    '--page-width': geometry.width,
-    '--page-top': geometry.top,
-    '--page-bottom': geometry.bottom,
+    '--page-center': `${geometry.center}%`,
+    '--page-width': `${geometry.width}%`,
+    '--page-top': `${geometry.top}%`,
+    '--page-height': `${100 - geometry.top - geometry.bottom}%`,
   } as CSSProperties)
 
   const scrollRef = useRef<HTMLDivElement>(null)
@@ -217,7 +226,15 @@ function ProjectDetails({
     >
       <div className="book-left-page">
         <div className="project-media-label"><span>Project film</span><span>{project.number} / 05</span></div>
-        <ProjectVideo project={project} active={active} mediaReady={mediaReady} controls={mobile} />
+        <ProjectVideo
+          project={project}
+          active={active}
+          mediaReady={mediaReady}
+          controls={mobile}
+          mobilePreview={mobile}
+          mobileActive={mobileVideoActive}
+          onMobileActivate={onMobileVideoActivate}
+        />
       </div>
       <div className="book-right-page">
         <div
@@ -271,7 +288,9 @@ export function BookProjectJourney() {
   const [active, setActive] = useState(-1)
   const [filmFailed, setFilmFailed] = useState(false)
   const [projectMediaReady, setProjectMediaReady] = useState(false)
+  const [mobileVideoId, setMobileVideoId] = useState<string | null>(null)
   const reducedMotion = useReducedMotion()
+  const cinematicViewport = useMediaQuery(BOOK_CINEMATIC_QUERY)
 
   useEffect(() => {
     const section = sectionRef.current
@@ -296,7 +315,7 @@ export function BookProjectJourney() {
 
     // Everything below only runs for the cinematic desktop layout. On tablet/mobile the
     // pinned stage is display:none, so we never touch the 21 MB book video at all.
-    media.add('(min-width: 981px)', () => {
+    media.add(BOOK_CINEMATIC_QUERY, () => {
       const frameProbe = document.createElement('canvas')
       frameProbe.width = 32
       frameProbe.height = 18
@@ -304,6 +323,47 @@ export function BookProjectJourney() {
       let cnnCoverDecoded = freezeFrame.complete && freezeFrame.naturalWidth > 0
       let armed = false
       let seekFrame = 0
+      let layoutFrame = 0
+      const stage = section.querySelector<HTMLElement>('.book-stage')
+      if (!stage) return
+
+      const updateSceneLayout = () => {
+        layoutFrame = 0
+        const stageWidth = stage.clientWidth
+        const stageHeight = stage.clientHeight
+        if (!stageWidth || !stageHeight) return
+
+        const coverScale = Math.max(stageWidth / FILM_WIDTH, stageHeight / FILM_HEIGHT)
+        const renderedWidth = FILM_WIDTH * coverScale
+        const renderedHeight = FILM_HEIGHT * coverScale
+        const cropOffsetX = (stageWidth - renderedWidth) / 2
+        const cropOffsetY = (stageHeight - renderedHeight) / 2
+
+        overlayRefs.current.forEach((overlay, index) => {
+          if (!overlay) return
+          const geometry = pageGeometry[index]
+          const sourceHeight = 100 - geometry.top - geometry.bottom
+          overlay.style.setProperty('--page-center', `${cropOffsetX + (geometry.center / 100) * renderedWidth}px`)
+          overlay.style.setProperty('--page-width', `${(geometry.width / 100) * renderedWidth}px`)
+          overlay.style.setProperty('--page-top', `${cropOffsetY + (geometry.top / 100) * renderedHeight}px`)
+          overlay.style.setProperty('--page-height', `${(sourceHeight / 100) * renderedHeight}px`)
+        })
+
+        const sceneScale = Math.hypot(stageWidth, stageHeight)
+        const holdDistance = clamp(stageHeight * 0.7, 480, 760)
+        const travelDistance = clamp(sceneScale * 0.55, 480, 900)
+        const scrollDistance = (stageHeight * 1.6) + (projects.length * holdDistance) + ((projects.length - 1) * travelDistance)
+        section.style.setProperty('--book-scroll-distance', `${Math.round(scrollDistance)}px`)
+      }
+
+      const scheduleLayout = () => {
+        if (!layoutFrame) layoutFrame = requestAnimationFrame(updateSceneLayout)
+      }
+
+      const resizeObserver = new ResizeObserver(scheduleLayout)
+      resizeObserver.observe(stage)
+      window.visualViewport?.addEventListener('resize', scheduleLayout)
+      updateSceneLayout()
 
       const handleCnnCoverReady = () => {
         cnnCoverDecoded = true
@@ -395,6 +455,7 @@ export function BookProjectJourney() {
         trigger: section,
         start: 'top top',
         end: 'bottom bottom',
+        invalidateOnRefresh: true,
         onUpdate: (self) => {
           const progress = self.progress
           progressRef.current = progress
@@ -420,8 +481,11 @@ export function BookProjectJourney() {
         video.removeEventListener('loadeddata', paintFrame)
         freezeFrame.removeEventListener('load', handleCnnCoverReady)
         intersectionObserver.disconnect()
+        resizeObserver.disconnect()
+        window.visualViewport?.removeEventListener('resize', scheduleLayout)
         scrollTrigger.kill()
         cancelAnimationFrame(seekFrame)
+        cancelAnimationFrame(layoutFrame)
       }
     })
 
@@ -448,7 +512,7 @@ export function BookProjectJourney() {
             <video
               ref={bookVideoRef}
               className="book-film book-film-source"
-              poster={projectMediaReady ? 'media/book-poster.jpg' : undefined}
+              poster={projectMediaReady && cinematicViewport ? 'media/book-poster.jpg' : undefined}
               muted
               playsInline
               preload="none"
@@ -459,9 +523,9 @@ export function BookProjectJourney() {
               onError={() => setFilmFailed(true)}
             />
           )}
-          <img className="book-film book-film-poster" src={projectMediaReady ? 'media/book-poster.jpg' : undefined} alt="" aria-hidden="true" width="1280" height="720" loading="lazy" decoding="async" />
+          <img className="book-film book-film-poster" src={projectMediaReady && cinematicViewport ? 'media/book-poster.jpg' : undefined} alt="" aria-hidden="true" width="1280" height="720" loading="lazy" decoding="async" />
           <canvas ref={bookCanvasRef} className="book-film book-film-canvas" aria-hidden="true" />
-          <img ref={bookFreezeRef} className="book-film book-film-freeze" src={projectMediaReady ? 'media/book-cnn-cover.webp' : undefined} alt="" aria-hidden="true" width="1280" height="720" decoding="async" />
+          <img ref={bookFreezeRef} className="book-film book-film-freeze" src={projectMediaReady && cinematicViewport ? 'media/book-cnn-cover.webp' : undefined} alt="" aria-hidden="true" width="1280" height="720" decoding="async" />
           <div className="book-shade" aria-hidden="true" />
           <div className="book-overlays">
             {projects.map((project, index) => (
@@ -469,7 +533,7 @@ export function BookProjectJourney() {
                 project={project}
                 index={index}
                 active={active === index}
-                mediaReady={projectMediaReady}
+                mediaReady={projectMediaReady && cinematicViewport}
                 overlayRef={(node) => { overlayRefs.current[index] = node }}
                 key={project.id}
               />
@@ -486,7 +550,16 @@ export function BookProjectJourney() {
       </div>
       <div className="mobile-project-list">
         {projects.map((project, index) => (
-          <ProjectDetails project={project} index={index} active mediaReady={projectMediaReady} mobile key={project.id} />
+          <ProjectDetails
+            project={project}
+            index={index}
+            active
+            mediaReady={projectMediaReady}
+            mobile
+            mobileVideoActive={mobileVideoId === project.id}
+            onMobileVideoActivate={() => setMobileVideoId(project.id)}
+            key={project.id}
+          />
         ))}
       </div>
     </section>

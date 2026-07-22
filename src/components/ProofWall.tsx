@@ -3,6 +3,7 @@ import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { proof } from '../data/portfolio'
 import { useReducedMotion } from '../hooks/useReducedMotion'
+import { PROOF_FLOW_QUERY, PROOF_PIN_QUERY } from '../config/responsive'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -136,8 +137,8 @@ export function ProofWall() {
       }
     }
 
-    media.add('(min-width: 901px)', () => createTimeline(true))
-    media.add('(max-width: 900px)', () => createTimeline(false))
+    media.add(PROOF_PIN_QUERY, () => createTimeline(true))
+    media.add(PROOF_FLOW_QUERY, () => createTimeline(false))
     requestAnimationFrame(() => ScrollTrigger.refresh())
 
     return () => media.revert()

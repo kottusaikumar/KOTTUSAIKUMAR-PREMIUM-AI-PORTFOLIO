@@ -4,6 +4,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { education, experience, projects } from '../data/portfolio'
 import { useReducedMotion } from '../hooks/useReducedMotion'
 import { Reveal } from './Reveal'
+import { EXPERIENCE_PIN_QUERY } from '../config/responsive'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -70,7 +71,7 @@ export function ExperienceTimeline() {
     if (!section || !stage || !sequence || reducedMotion) return
 
     const media = gsap.matchMedia()
-    media.add('(min-width: 1101px) and (min-height: 600px)', () => {
+    media.add(EXPERIENCE_PIN_QUERY, () => {
       const projectFrame = sequence.querySelector<HTMLElement>('.experience-project-frame')
       const projectSlides = gsap.utils.toArray<HTMLElement>('.experience-project-slide', sequence)
       const steps = gsap.utils.toArray<HTMLElement>('.experience-sequence-step', stage)

@@ -13,6 +13,8 @@ import {
 } from 'simple-icons'
 import { personal } from '../data/portfolio'
 import { useReducedMotion } from '../hooks/useReducedMotion'
+import { useMediaQuery } from '../hooks/useMediaQuery'
+import { RESUME_CINEMATIC_QUERY } from '../config/responsive'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -52,6 +54,7 @@ export function ResumeScrollStory() {
   const progressRef = useRef<HTMLSpanElement>(null)
   const phaseRef = useRef<HTMLSpanElement>(null)
   const reducedMotion = useReducedMotion()
+  const cinematicViewport = useMediaQuery(RESUME_CINEMATIC_QUERY)
   const [auxiliaryMediaReady, setAuxiliaryMediaReady] = useState(false)
   const frames = useMemo(
     () => Array.from({ length: FRAME_COUNT }, (_, index) => `resume-scroll/frames/resume-${String(index).padStart(2, '0')}.webp`),
@@ -264,7 +267,7 @@ export function ResumeScrollStory() {
     return () => context.revert()
   }, [frames, reducedMotion])
 
-  if (reducedMotion) {
+  if (reducedMotion || !cinematicViewport) {
     return (
       <section className="resume-story reduced" aria-labelledby="resume-story-title">
         <div className="resume-reduced-shell">
