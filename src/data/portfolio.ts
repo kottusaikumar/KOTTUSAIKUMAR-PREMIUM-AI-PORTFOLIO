@@ -7,7 +7,7 @@ export const personal = {
   email: 'kottusaikumar2003@gmail.com',
   heroLine: 'Engineering intelligence into usable systems.',
   heroNote: 'AI products, data systems, and interfaces - built end to end.',
-  resume: 'https://drive.google.com/file/d/1dinXqMl82nn4RZt2OMEf1ajdir6K6NeH/view?usp=sharing',
+  resume: 'https://drive.google.com/file/d/1Nm1gsVp4oo11PzL_AuPuJOxGP3PX21_k/view?usp=sharing',
   audio: 'audio/about-intro.mp3',
 }
 

@@ -1,8 +1,25 @@
+import { useState, type PointerEvent } from 'react'
 import { about, personal } from '../data/portfolio'
 import { AudioControl } from './AudioControl'
 import { Reveal } from './Reveal'
 
 export function AboutSection() {
+  const [portraitActive, setPortraitActive] = useState(false)
+
+  const handlePointerEnter = (event: PointerEvent<HTMLElement>) => {
+    if (event.pointerType === 'mouse') setPortraitActive(true)
+  }
+
+  const handlePointerLeave = () => setPortraitActive(false)
+
+  const handlePointerDown = (event: PointerEvent<HTMLElement>) => {
+    if (event.pointerType !== 'mouse') setPortraitActive(true)
+  }
+
+  const handlePointerEnd = (event: PointerEvent<HTMLElement>) => {
+    if (event.pointerType !== 'mouse') setPortraitActive(false)
+  }
+
   return (
     <section className="about-section paper-section" id="about" aria-labelledby="about-title">
       <div className="section-shell about-grid">
@@ -11,7 +28,15 @@ export function AboutSection() {
           <h2 id="about-title">A builder behind <em>the systems.</em></h2>
         </Reveal>
         <Reveal className="portrait-frame" delay={0.08}>
-          <figure className="portrait-card" tabIndex={0} aria-label="Kottu Saikumar portrait card">
+          <figure
+            className={`portrait-card${portraitActive ? ' is-contact-active' : ''}`}
+            aria-label="Kottu Saikumar portrait card"
+            onPointerEnter={handlePointerEnter}
+            onPointerLeave={handlePointerLeave}
+            onPointerDown={handlePointerDown}
+            onPointerUp={handlePointerEnd}
+            onPointerCancel={handlePointerEnd}
+          >
             <div className="portrait-backdrop" aria-hidden="true">
               <img src="images/about/about-portrait-back.webp" alt="" width="1000" height="1414" loading="lazy" />
             </div>

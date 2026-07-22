@@ -102,6 +102,7 @@ h2 { margin-bottom: 0; font-size: clamp(3.2rem, 2.1rem + 5.3vw, 8.5rem); }
 
 /* Scroll-scrubbed resume story */
 .resume-story { --resume-progress: 0; position: relative; z-index: 4; height: 760svh; color: var(--white); background: transparent; }
+.resume-story:not(.reduced) { pointer-events: none; }
 .resume-story-sticky { position: sticky; top: 0; height: 100svh; min-height: 38rem; overflow: hidden; isolation: isolate; background-color: #b98d5e; background-image: repeating-linear-gradient(97deg, rgb(255 255 255 / 5%) 0 2px, transparent 2px 19px), repeating-linear-gradient(6deg, #bd9161 0 8px, #b78a59 8px 17px, #c19869 17px 28px); transform-origin: 50% 0%; will-change: transform, border-radius, box-shadow; }
 .resume-story-sticky::before { content: ''; position: absolute; inset: 0; opacity: .36; background: linear-gradient(90deg, rgb(73 42 20 / 20%), transparent 18%, transparent 82%, rgb(73 42 20 / 18%)); }
 .resume-story-sticky::after { content: ''; position: absolute; z-index: 2; inset: 0; pointer-events: none; background: radial-gradient(circle at 50% 50%, transparent 38%, rgb(40 24 12 / 22%) 100%); }
@@ -277,7 +278,7 @@ h2 { margin-bottom: 0; font-size: clamp(3.2rem, 2.1rem + 5.3vw, 8.5rem); }
 .about-heading h2 { max-width: 12ch; }
 .about-heading h2 em, .wide-heading h2 em { color: var(--green); }
 .portrait-frame { grid-area: portrait; position: sticky; top: 8vh; width: min(100%, 30rem); justify-self: center; perspective: 900px; }
-.portrait-card { position: relative; width: 100%; aspect-ratio: 3 / 4; margin: 0 0 4.4rem; cursor: pointer; outline: none; filter: drop-shadow(0 1.5rem 2.5rem rgb(0 0 0 / 25%)); transform: rotate(-1.5deg); transform-origin: center bottom; transform-style: preserve-3d; }
+.portrait-card { position: relative; width: 100%; aspect-ratio: 3 / 4; margin: 0 0 4.4rem; outline: none; filter: drop-shadow(0 1.5rem 2.5rem rgb(0 0 0 / 25%)); transform: rotate(-1.5deg); transform-origin: center bottom; transform-style: preserve-3d; touch-action: pan-y; user-select: none; }
 .portrait-backdrop { position: absolute; z-index: 0; inset: 8% 6% 0; overflow: hidden; border: .65rem solid var(--green); border-radius: var(--radius-lg); background: var(--ink); box-shadow: inset 0 0 0 1px rgb(255 255 255 / 12%); filter: brightness(.88) saturate(.84); transform-origin: center bottom; transition: filter .5s ease, transform .5s var(--ease-enter); }
 .portrait-backdrop::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to top, rgb(8 32 21 / 56%), transparent 48%); pointer-events: none; }
 .portrait-backdrop img { width: 100%; height: 100%; object-fit: cover; object-position: center; }
@@ -285,10 +286,14 @@ h2 { margin-bottom: 0; font-size: clamp(3.2rem, 2.1rem + 5.3vw, 8.5rem); }
 .portrait-caption { position: absolute; z-index: 3; right: -4%; bottom: 0; left: -4%; display: grid; gap: .22rem; padding: .85rem 1.15rem .95rem; color: var(--paper); background: var(--ink); border: 1px solid rgb(244 240 229 / 18%); border-radius: 0 0 1.2rem 1.2rem; box-shadow: 0 .9rem 1.5rem rgb(0 0 0 / 22%); text-align: center; backface-visibility: hidden; transform: perspective(500px) translateY(100%) rotateX(-90deg); transform-origin: center top; transition: transform .5s var(--ease-enter); }
 .portrait-caption strong { font-family: var(--serif); font-size: clamp(1.55rem, 2.4vw, 2.2rem); font-weight: 400; line-height: 1; }
 .portrait-caption span { color: var(--mint-light); font-size: .66rem; font-weight: 750; letter-spacing: .12em; text-transform: uppercase; }
-.portrait-card:hover .portrait-backdrop, .portrait-card:focus .portrait-backdrop { filter: brightness(.3) saturate(.68); transform: perspective(700px) translateY(.9rem) rotateX(54deg); }
-.portrait-card:hover .portrait-cutout, .portrait-card:focus .portrait-cutout { filter: contrast(1.02) brightness(1) drop-shadow(0 1.3rem .9rem rgb(0 0 0 / 34%)); transform: translateX(-50%) translateY(-3%) scale(1.13); }
-.portrait-card:hover .portrait-caption, .portrait-card:focus .portrait-caption { transform: perspective(500px) translateY(100%) rotateX(-28deg); }
-.portrait-card:focus-visible { outline: 2px solid var(--green-active); outline-offset: .7rem; }
+.portrait-card.is-contact-active .portrait-backdrop { filter: brightness(.3) saturate(.68); transform: perspective(700px) translateY(.9rem) rotateX(54deg); }
+.portrait-card.is-contact-active .portrait-cutout { filter: contrast(1.02) brightness(1) drop-shadow(0 1.3rem .9rem rgb(0 0 0 / 34%)); transform: translateX(-50%) translateY(-3%) scale(1.13); }
+.portrait-card.is-contact-active .portrait-caption { transform: perspective(500px) translateY(100%) rotateX(-28deg); }
+@media (hover: hover) and (pointer: fine) {
+  .portrait-card:hover .portrait-backdrop { filter: brightness(.3) saturate(.68); transform: perspective(700px) translateY(.9rem) rotateX(54deg); }
+  .portrait-card:hover .portrait-cutout { filter: contrast(1.02) brightness(1) drop-shadow(0 1.3rem .9rem rgb(0 0 0 / 34%)); transform: translateX(-50%) translateY(-3%) scale(1.13); }
+  .portrait-card:hover .portrait-caption { transform: perspective(500px) translateY(100%) rotateX(-28deg); }
+}
 .about-copy { grid-area: copy; padding-top: 1.5rem; }
 .about-copy > p { max-width: 38rem; color: #2c2a27; font-family: var(--serif); font-size: clamp(1.25rem, 1.7vw, 1.65rem); line-height: 1.4; }
 .about-copy > p + p { margin-top: 1.35rem; }
@@ -1041,9 +1046,12 @@ h2 { margin-bottom: 0; font-size: clamp(3.2rem, 2.1rem + 5.3vw, 8.5rem); }
   *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
   .pill-assistant-icon { opacity: 0; animation: none !important; }
   .pill-assistant-label { opacity: 1; animation: none !important; }
-  .portrait-card:hover .portrait-backdrop, .portrait-card:focus .portrait-backdrop,
-  .portrait-card:hover .portrait-cutout, .portrait-card:focus .portrait-cutout,
-  .portrait-card:hover .portrait-caption, .portrait-card:focus .portrait-caption { transform: none; }
+  .portrait-card.is-contact-active .portrait-backdrop,
+  .portrait-card.is-contact-active .portrait-cutout,
+  .portrait-card.is-contact-active .portrait-caption,
+  .portrait-card:hover .portrait-backdrop,
+  .portrait-card:hover .portrait-cutout,
+  .portrait-card:hover .portrait-caption { transform: none; }
   .portal-intro { display: none; }
   .book-journey { height: auto; padding-block: 7rem; }
   .book-sticky { position: relative; height: auto; min-height: 0; overflow: visible; }
