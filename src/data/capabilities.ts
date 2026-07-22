@@ -23,7 +23,7 @@ export interface CapabilityRole {
   id: RoleId
   label: string
   featuredSkillIds: string[]
-  /** Underside / accent color used for the role's sticker-peel tiles and highlights. */
+  /** Accent color used for the role's active and featured skill highlights. */
   accent: string
   accentSoft: string
 }

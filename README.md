@@ -4,7 +4,7 @@ A production-ready, editable React + TypeScript + Vite portfolio rebuilt from th
 
 ## Highlights
 
-- Reversible `PORTFOLIO` O portal into the hero.
+- `PORTFOLIO` O portal into the scroll-controlled résumé story.
 - Editorial About, Skills, Experience, Process, Proof, and Contact acts.
 - Scroll-controlled 30-second five-book journey with five stable project reading holds.
 - Five real project videos; only the active video plays.
@@ -17,13 +17,13 @@ A production-ready, editable React + TypeScript + Vite portfolio rebuilt from th
 ## Prerequisites
 
 - Node.js 20 or newer.
-- pnpm 10 or newer (npm also works if you generate an npm lockfile).
+- npm 10 or newer.
 
 ## Development
 
 ```bash
-pnpm install
-pnpm dev
+npm install
+npm run dev
 ```
 
 Vite prints the local address. Open it in a modern browser.
@@ -31,17 +31,17 @@ Vite prints the local address. Open it in a modern browser.
 ## Validation
 
 ```bash
-pnpm typecheck
-pnpm lint
-pnpm build
-pnpm preview
+npm run typecheck
+npm run lint
+npm run build
+npm run preview
 ```
 
 The production output is written to `dist/`.
 
 ## Content updates
 
-All factual content and media paths live in `src/data/portfolio.ts`. Project video files are in `public/projects/videos/`, poster frames are in `public/projects/posters/`, and the book film is `public/media/three_clip_total_flow.mp4`.
+All factual content and media paths live in `src/data/portfolio.ts`. Project video files are in `public/projects/videos/`, poster frames are in `public/projects/posters/`, and the desktop book film is `public/media/book-scroll-optimized.mp4`.
 
 Education, certification, live-demo, and availability data were not present in the supplied archive. Education is flagged as a placeholder in the central data file. No missing fact was invented.
 
@@ -49,21 +49,21 @@ Education, certification, live-demo, and availability data were not present in t
 
 This is a static Vite site. Use the following settings on any static host:
 
-- Build command: `pnpm build`
+- Build command: `npm run build`
 - Publish directory: `dist`
 - Node version: 20+
 
 ### Vercel
 
-Import the repository, select the Vite preset, keep `pnpm build`, and publish `dist`.
+Import the repository, select the Vite preset, keep `npm run build`, and publish `dist`.
 
 ### Netlify
 
-Create a site from the repository with build command `pnpm build` and publish directory `dist`.
+Create a site from the repository with build command `npm run build` and publish directory `dist`.
 
 ### GitHub Pages
 
-If publishing under a repository subpath, set Vite's `base` option to `/<repository-name>/`, rebuild, and deploy `dist` with a Pages workflow. For a custom domain or user site, the default `/` base is correct.
+The included workflow builds with npm and publishes `dist` to the `gh-pages` branch. Vite uses relative asset URLs so the same build works under this repository subpath.
 
 ## Accessibility and motion
 
@@ -76,7 +76,7 @@ If publishing under a repository subpath, set Vite's `base` option to `/<reposit
 
 ## Performance notes
 
-- Hero uses responsive AVIF media with fixed dimensions.
+- The first résumé frame is responsive, preloaded, and rendered with fixed dimensions.
 - Below-the-fold imagery is lazy-loaded.
 - The book film preloads metadata only.
 - Project videos use `preload="none"` until active and inactive videos pause.

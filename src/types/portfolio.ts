@@ -20,7 +20,6 @@ export interface Project {
   poster: string
   github: string
   live?: string
-  placeholder?: boolean
 }
 
 export interface Experience {

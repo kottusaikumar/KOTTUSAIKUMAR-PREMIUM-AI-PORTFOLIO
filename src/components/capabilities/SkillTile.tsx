@@ -1,17 +1,11 @@
-import { useEffect, useState, type CSSProperties } from 'react'
+import type { CSSProperties } from 'react'
 import type { Skill } from '../../data/capabilities'
 import { getBrandIcon } from './icons'
-import { StickerPeel } from './StickerPeel'
-import { renderTileImage } from './renderTileImage'
 
 interface SkillTileProps {
   skill: Skill
   isActive: boolean
   isFeatured: boolean
-  /** Renders a live WebGL StickerPeel layer over the tile front. */
-  usePeel: boolean
-  /** CSS-only corner-fold fallback (tablet overflow / mobile / reduced motion / WebGL unavailable). */
-  useCssFold: boolean
   accent: string
 }
 
@@ -43,26 +37,17 @@ function readableBrandColor(hex: string) {
   return '#f4f0e5'
 }
 
-export function SkillTile({ skill, isActive, isFeatured, usePeel, useCssFold, accent }: SkillTileProps) {
+export function SkillTile({ skill, isActive, isFeatured, accent }: SkillTileProps) {
   const icon = skill.iconKind === 'brand' ? getBrandIcon(skill.iconSlug) : undefined
-  const [peelImage, setPeelImage] = useState<string | null>(null)
 
   const tileClassName = [
     'skill-tile',
     icon ? 'has-brand-icon' : 'has-glyph-icon',
     isActive ? 'is-active' : 'is-inactive',
     isFeatured ? 'is-featured' : '',
-    useCssFold ? 'has-css-fold' : '',
   ]
     .filter(Boolean)
     .join(' ')
-
-  // Build the peel texture lazily, only once per skill, only when actually needed.
-  useEffect(() => {
-    if (!usePeel || peelImage) return
-    const img = renderTileImage(skill, '#0d3d26', '#f4f0e5')
-    if (img) setPeelImage(img)
-  }, [usePeel, peelImage, skill])
 
   return (
     <div
@@ -85,10 +70,6 @@ export function SkillTile({ skill, isActive, isFeatured, usePeel, useCssFold, ac
         )}
       </span>
       <span className="skill-tile-label">{skill.label}</span>
-
-      {usePeel && peelImage ? (
-        <StickerPeel image={peelImage} width={96} height={96} backColor={accent} curlRotation={235} />
-      ) : null}
     </div>
   )
 }

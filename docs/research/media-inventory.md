@@ -5,14 +5,14 @@
 | Asset | Facts | Use |
 |---|---|---|
 | `zero.university_website_video.mp4` | 79.51 s, 1920x1020, 29.97 fps, H.264, AAC stereo | Research only; never shipped |
-| `three_clip_total_flow.mp4` | 30.04 s, 1280x720, 24 fps, H.264, AAC stereo | Signature book background, muted and scrubbed |
+| `three_clip_total_flow.mp4` | 30.04 s, 1280x720, 24 fps, H.264, AAC stereo | Research source; replaced by the optimized scrub film and not shipped |
 
 ## Recovered portfolio media
 
 | Asset group | Count / size notes | Use |
 |---|---|---|
-| Hero art | 4 subjects x AVIF/WebP/PNG responsive variants | Hero rotating identity visual; AVIF/WebP preferred |
-| About portraits | Front/back PNG + WebP | Editorial portrait reveal; WebP shipped |
+| Social preview art | 1 WebP | Open Graph and X preview image |
+| About portraits | Backdrop WebP + transparent cutout PNG | Editorial portrait interaction |
 | Project videos | 5 MP4s, roughly 2.5-2.8 MB each | One active video per open book; muted/playsinline |
 | Audio introduction | `about-intro.mp3`, 1.64 MB | User-triggered only |
 | Brand logo | Vajra.ai PNG + WebP | Experience evidence |
@@ -32,7 +32,7 @@
 ## Inferred loading policy
 
 - Book film is `preload="metadata"`, not fetched as an LCP asset.
+- The shipped film is `book-scroll-optimized.mp4`; the larger source film is excluded.
 - Project videos are `preload="none"` until their overlay is active.
 - At most one project video plays. All inactive videos pause and reset only when far outside the active segment.
 - Poster fallbacks use still frames or the first decoded frame where an explicit poster is not available.
-

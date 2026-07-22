@@ -155,8 +155,6 @@ export function CapabilitiesSection() {
                   skill={skill}
                   isActive={isActive}
                   isFeatured={isFeatured}
-                  usePeel={false}
-                  useCssFold={false}
                   accent={activeRole.accent}
                 />
               )

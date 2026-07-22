@@ -234,43 +234,6 @@
   text-shadow: 0 0 12px color-mix(in srgb, var(--tile-accent, var(--mint-light)) 24%, transparent);
 }
 
-/* CSS-only corner-fold fallback: tablet overflow, mobile, reduced motion, or no WebGL. */
-.skill-tile.has-css-fold {
-  overflow: hidden;
-}
-
-.skill-tile.has-css-fold::after {
-  content: '';
-  position: absolute;
-  right: -1px;
-  bottom: -1px;
-  width: 1.1rem;
-  height: 1.1rem;
-  background: linear-gradient(135deg, transparent 50%, var(--tile-accent, var(--mint-light)) 50%);
-  border-top-left-radius: 0.35rem;
-  opacity: 0;
-  transform: translate(4px, 4px);
-  transition: opacity 0.3s var(--ease-body), transform 0.3s var(--ease-body);
-}
-
-.skill-tile.has-css-fold.is-active::after {
-  opacity: 0.9;
-  transform: translate(0, 0);
-}
-
-.sticker-peel-layer {
-  position: absolute;
-  inset: 0;
-  margin: auto;
-  pointer-events: none;
-}
-
-.sticker-peel-canvas {
-  display: block;
-  width: 100%;
-  height: 100%;
-}
-
 /* --- Role filter buttons (reduced motion only) --------------------------- */
 
 .capabilities-role-filters {
@@ -366,5 +329,4 @@
 @media (prefers-reduced-motion: reduce) {
   .skill-tile { transition: none; }
   .capabilities-panel.is-revealed .skill-tile.is-active { animation: none; }
-  .skill-tile.has-css-fold::after { transition: none; }
 }

@@ -200,30 +200,6 @@ h2 { margin-bottom: 0; font-size: clamp(3.2rem, 2.1rem + 5.3vw, 8.5rem); }
   .resume-story.phone-full-animation .resume-story-footer { right: 1rem; bottom: 4.9rem; left: 1rem; }
 }
 
-/* Hero */
-.hero { position: relative; min-height: 100svh; display: grid; grid-template-columns: minmax(0, 1.08fr) minmax(340px, .92fr); overflow: hidden; background: var(--green-deep); isolation: isolate; }
-.hero::before { content: ''; position: absolute; inset: 0; opacity: .12; background-image: linear-gradient(rgb(255 255 255 / 12%) 1px, transparent 1px), linear-gradient(90deg, rgb(255 255 255 / 12%) 1px, transparent 1px); background-size: 5rem 5rem; mask-image: linear-gradient(to bottom, black, transparent 80%); }
-.hero-copy { position: relative; z-index: 3; align-self: center; padding: clamp(5rem, 9vh, 7rem) 2rem clamp(5.5rem, 10vh, 8rem) var(--gutter); }
-.hero h1 { max-width: 9.3ch; margin-bottom: 1.5rem; font-size: clamp(4.2rem, 6.6vw, 7.6rem); line-height: .87; }
-.hero h1 em { color: var(--mint-light); }
-.hero-line { display: block; overflow: hidden; padding: .04em .06em .07em 0; }
-.hero-line > span { display: block; transform-origin: left bottom; }
-.role-rotator { min-height: 2.1rem; color: var(--mint); font-family: var(--serif); font-size: clamp(1.35rem, 2vw, 2rem); }
-.hero-note { max-width: 32rem; margin: .85rem 0 1.65rem; color: rgb(255 255 255 / 74%); font-size: 1rem; line-height: 1.65; }
-.hero-actions { display: flex; flex-wrap: wrap; gap: .75rem; }
-.hero-visual { position: relative; min-height: 100%; overflow: hidden; background: var(--green-deep); will-change: clip-path; }
-.hero-visual::after { content: ''; position: absolute; z-index: 2; inset: 0; background: linear-gradient(90deg, var(--green-deep), transparent 23%), linear-gradient(to top, var(--green-deep), transparent 20%); pointer-events: none; }
-.hero-blueprint { position: absolute; inset: 8% 5% 7%; opacity: .2; border: 1px solid rgb(183 244 205 / 25%); background-image: linear-gradient(rgb(183 244 205 / 18%) 1px, transparent 1px), linear-gradient(90deg, rgb(183 244 205 / 18%) 1px, transparent 1px); background-size: 3.2rem 3.2rem; transform: rotate(-2deg); }
-.hero-resume-frame { position: absolute; z-index: 1; width: 12rem; padding: 1.1rem; color: var(--green-deep); background: var(--paper); border-radius: .3rem; box-shadow: 0 20px 55px rgb(0 0 0 / 20%); transform-origin: center; }
-.hero-resume-frame span, .hero-resume-frame small { display: block; font-size: .55rem; font-weight: 750; letter-spacing: .12em; text-transform: uppercase; }
-.hero-resume-frame strong { display: block; margin: .35rem 0 .45rem; font-family: var(--serif); font-size: 2.1rem; font-weight: 400; letter-spacing: -.05em; }
-.hero-frame-skills { top: 18%; left: 2%; transform: rotate(-6deg); }
-.hero-frame-proof { right: 3%; bottom: 13%; transform: rotate(5deg); }
-.hero-character { position: absolute; z-index: 2; inset: 0; display: grid; place-items: end center; transform-origin: center bottom; will-change: transform, opacity, filter; }
-.hero-character img { width: auto; max-width: none; height: 108%; object-fit: contain; object-position: center bottom; }
-.hero-index { position: absolute; z-index: 4; right: 2rem; top: 2rem; font-size: .7rem; letter-spacing: .16em; }
-.scroll-hint { position: absolute; z-index: 3; bottom: 2.2rem; left: var(--gutter); font-size: .72rem; letter-spacing: .14em; text-decoration: none; text-transform: uppercase; }
-
 /* Persistent controls */
 .pill-nav { --pill-glass: linear-gradient(145deg, rgb(20 55 42 / 20%), rgb(6 28 20 / 28%)); --pill-glass-border: rgb(255 255 255 / 28%); position: fixed; z-index: 80; left: 50%; bottom: max(1.15rem, env(safe-area-inset-bottom)); width: min(calc(100vw - 2rem), 30.5rem); color: var(--white); opacity: 0; transform: translate(-50%, 1.5rem); pointer-events: none; transition: opacity .45s var(--ease-enter), transform .45s var(--ease-enter); }
 .pill-nav.visible { opacity: 1; transform: translate(-50%, 0); pointer-events: auto; }
@@ -928,17 +904,6 @@ h2 { margin-bottom: 0; font-size: clamp(3.2rem, 2.1rem + 5.3vw, 8.5rem); }
   .education-note { padding: 1.5rem; }
   .education-title-row { display: grid; gap: .45rem; }
   .education-title-row time { padding-top: 0; }
-  .hero { min-height: 100svh; grid-template-columns: 1fr; grid-template-rows: auto minmax(32rem, 66vh); }
-  .hero-copy { padding: 6.5rem var(--gutter) 2.5rem; }
-  .hero h1 { max-width: 8.5ch; font-size: clamp(3.55rem, 16vw, 5.8rem); }
-  .hero-visual { min-height: 32rem; }
-  .hero-visual::after { background: linear-gradient(to bottom, var(--green-deep), transparent 30%), linear-gradient(to top, var(--green-deep), transparent 20%); }
-  .hero-character img { height: 104%; }
-  .hero-resume-frame { width: 9rem; padding: .8rem; }
-  .hero-resume-frame strong { font-size: 1.55rem; }
-  .hero-frame-skills { top: 10%; left: var(--gutter); }
-  .hero-frame-proof { right: var(--gutter); bottom: 12%; }
-  .scroll-hint { display: none; }
   .pill-nav { width: min(calc(100% - 3.75rem), 24.5rem); bottom: max(.65rem, env(safe-area-inset-bottom)); }
   .pill-dock { min-height: 3.75rem; grid-template-columns: 3rem minmax(0, 1fr) 3.85rem; gap: .27rem; padding: .28rem; }
   .pill-assistant-button { width: 3rem; height: 3rem; font-size: .6rem; }

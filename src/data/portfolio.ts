@@ -5,8 +5,6 @@ export const personal = {
   role: 'Full-Stack AI Developer',
   location: 'Hyderabad, India',
   email: 'kottusaikumar2003@gmail.com',
-  heroLine: 'Engineering intelligence into usable systems.',
-  heroNote: 'AI products, data systems, and interfaces - built end to end.',
   resume: 'https://drive.google.com/file/d/1Nm1gsVp4oo11PzL_AuPuJOxGP3PX21_k/view?usp=sharing',
   audio: 'audio/about-intro.mp3',
 }
@@ -16,8 +14,6 @@ export const about = [
   "My journey began during my engineering studies, where I developed a deep interest in Data Science and Artificial Intelligence. Since then, I've continuously expanded my skills across Machine Learning, Deep Learning, NLP, and full-stack development.",
   'Beyond coding, I enjoy exploring AI research trends, experimenting with ML models, and building practical projects that solve real-world problems. I actively maintain my work on GitHub and continuously learn from the evolving tech ecosystem.',
 ]
-
-export const roles = ['Data Scientist', 'AI/ML Engineer', 'Full-Stack AI Developer', 'Data Analyst']
 
 export const experience: Experience[] = [
   {

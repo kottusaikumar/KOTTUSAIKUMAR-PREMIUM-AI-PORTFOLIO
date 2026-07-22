@@ -9,7 +9,7 @@
 
 ## Source-film findings
 
-- `three_clip_total_flow.mp4` is a 30.04-second, 1280x720, 23.99 fps H.264 film containing the complete journey: five-book establishing shot, NLP open, RAG travel/open, Deep Learning travel/open, CNN travel/open, and UI/UX travel/open.
+- The analyzed source film was a 30.04-second, 1280x720, 23.99 fps H.264 sequence containing the complete journey: five-book establishing shot, NLP open, RAG travel/open, Deep Learning travel/open, CNN travel/open, and UI/UX travel/open.
 - The original stream used a conventional inter-frame GOP structure. Continuous `currentTime` changes therefore required the browser to decode from earlier keyframes, producing visible seek jumps.
 - No narrative frames were missing. The defect was random-access density, so synthetic visual generation was not appropriate.
 
@@ -31,7 +31,7 @@
 
 ## Technical correction
 
-- Added `book-scroll-optimized.mp4`, encoded at 24 fps with every frame as an I-frame for deterministic forward and reverse seeking.
+- The shipped `book-scroll-optimized.mp4` is encoded at 24 fps with every frame as an I-frame for deterministic forward and reverse seeking; the superseded source film is excluded from deployment.
 - Scroll updates are coalesced into one animation-frame commit.
 - The project overlay starts only after the physical pages are visible, grows from 74% to 100%, holds at full size, then fades during release.
 - The section uses a 980-vh runway, Lenis duration 1.15 seconds, and no scroll snapping.
