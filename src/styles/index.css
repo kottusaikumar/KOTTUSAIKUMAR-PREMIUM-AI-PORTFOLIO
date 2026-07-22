@@ -402,7 +402,7 @@ h2 { margin-bottom: 0; font-size: clamp(3.2rem, 2.1rem + 5.3vw, 8.5rem); }
 .book-film-freeze { opacity: 0; pointer-events: none; }
 .book-shade { position: absolute; inset: 0; background: linear-gradient(to bottom, rgb(3 13 12 / 48%) 0, transparent 26%, transparent 70%, rgb(3 13 12 / 66%) 100%), linear-gradient(90deg, rgb(3 13 12 / 18%), transparent 28%, transparent 72%, rgb(3 13 12 / 16%)); pointer-events: none; }
 .book-overlays { position: absolute; inset: 0; z-index: 5; perspective: 1400px; pointer-events: none; }
-.book-overlay { position: absolute; top: var(--page-top); bottom: var(--page-bottom); left: var(--page-center); width: var(--page-width); display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 0; color: var(--ink); opacity: 0; visibility: hidden; transform: translate3d(-50%, 12px, 0) scale(.88); transform-origin: 50% 58%; will-change: transform, opacity; }
+.book-overlay { position: absolute; top: var(--page-top); bottom: var(--page-bottom); left: var(--page-center); width: var(--page-width); container-type: inline-size; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 0; color: var(--ink); opacity: 0; visibility: hidden; transform: translate3d(-50%, 12px, 0) scale(.88); transform-origin: 50% 58%; will-change: transform, opacity; }
 .book-left-page, .book-right-page { min-width: 0; min-height: 0; overflow: hidden; background: rgb(244 240 229 / 94%); }
 .book-left-page { position: relative; display: grid; padding: clamp(.48rem, .72vw, .72rem); border-radius: .18rem .55rem .55rem .25rem; transform: perspective(1400px) rotateY(1.2deg); clip-path: polygon(1.5% 1.5%, 100% 0, 98.8% 100%, 0 98.2%); }
 .project-media-label { position: absolute; z-index: 2; top: 1.3rem; right: 1.45rem; left: 1.45rem; display: flex; justify-content: space-between; color: var(--green-deep); font-size: .56rem; font-weight: 700; letter-spacing: .13em; text-transform: uppercase; pointer-events: none; }
@@ -451,22 +451,54 @@ h2 { margin-bottom: 0; font-size: clamp(3.2rem, 2.1rem + 5.3vw, 8.5rem); }
 .page-scroll-rail.is-hidden { opacity: 0; }
 .page-scroll-thumb { position: absolute; left: 0; width: 100%; min-height: 10%; border-radius: 999px; background: var(--green-deep); }
 .book-overlay-compact .project-page-scroll { overflow: hidden; padding: clamp(.4rem, .7vw, .62rem) clamp(.62rem, 1vw, .9rem); }
-.book-overlay-compact .project-number { margin-bottom: .32rem; font-size: .58rem; }
-.book-overlay-compact .book-right-page h3 { margin-bottom: .25rem; font-size: clamp(1.35rem, 1.75vw, 1.85rem); }
-.book-overlay-compact .project-description { font-size: clamp(.68rem, .7vw, .76rem); line-height: 1.32; }
+.book-overlay-1,
+.book-overlay-2,
+.book-overlay-3 {
+  --project-type-factor: 1;
+  --project-title-size: clamp(1.6rem, calc(2.9cqi * var(--project-type-factor)), 8.8rem);
+  --project-description-size: clamp(.83rem, calc(1.093cqi * var(--project-type-factor)), 3.32rem);
+  --project-number-size: clamp(.62rem, calc(.817cqi * var(--project-type-factor)), 2.48rem);
+  --project-fact-label-size: clamp(.65rem, calc(.856cqi * var(--project-type-factor)), 2.6rem);
+  --project-fact-size: clamp(.73rem, calc(1.067cqi * var(--project-type-factor)), 3.24rem);
+  --project-tag-size: clamp(.56rem, calc(.738cqi * var(--project-type-factor)), 2.24rem);
+  --project-section-label-size: clamp(.61rem, calc(.803cqi * var(--project-type-factor)), 2.44rem);
+  --project-detail-size: clamp(.71rem, calc(.935cqi * var(--project-type-factor)), 2.84rem);
+  --project-link-size: clamp(.73rem, calc(.961cqi * var(--project-type-factor)), 2.92rem);
+  --project-media-label-size: clamp(.45rem, calc(.593cqi * var(--project-type-factor)), 1.8rem);
+}
+.book-overlay-2 { --project-type-factor: 1.024; }
+.book-overlay-3 { --project-type-factor: 1.002; }
+.book-overlay-4,
+.book-overlay-5 {
+  --project-type-factor: 1;
+  --project-title-size: clamp(1.45rem, calc(3.212cqi * var(--project-type-factor)), 7.8rem);
+  --project-description-size: clamp(.7rem, calc(1.153cqi * var(--project-type-factor)), 2.8rem);
+  --project-number-size: clamp(.58rem, calc(.955cqi * var(--project-type-factor)), 2.32rem);
+  --project-fact-label-size: clamp(.6rem, calc(.988cqi * var(--project-type-factor)), 2.4rem);
+  --project-fact-size: clamp(.76rem, calc(1.252cqi * var(--project-type-factor)), 3.04rem);
+  --project-tag-size: clamp(.52rem, calc(.857cqi * var(--project-type-factor)), 2.08rem);
+  --project-section-label-size: clamp(.56rem, calc(.922cqi * var(--project-type-factor)), 2.24rem);
+  --project-detail-size: clamp(.61rem, calc(1.005cqi * var(--project-type-factor)), 2.44rem);
+  --project-link-size: clamp(.68rem, calc(1.12cqi * var(--project-type-factor)), 2.72rem);
+  --project-media-label-size: clamp(.45rem, calc(.741cqi * var(--project-type-factor)), 1.8rem);
+}
+.book-overlay-5 { --project-type-factor: 1.024; }
+.book-overlay-compact .project-number { margin-bottom: .32rem; font-size: var(--project-number-size); }
+.book-overlay-compact .book-right-page h3 { margin-bottom: .25rem; font-size: var(--project-title-size); }
+.book-overlay-compact .project-description { font-size: var(--project-description-size); line-height: 1.32; }
 .book-overlay-compact .project-facts { gap: .35rem; margin: .28rem 0; padding: .25rem 0; }
-.book-overlay-compact .project-facts dt { margin-bottom: .18rem; font-size: .6rem; }
-.book-overlay-compact .project-facts dd { font-size: clamp(.68rem, .7vw, .76rem); }
+.book-overlay-compact .project-facts dt { margin-bottom: .18rem; font-size: var(--project-fact-label-size); }
+.book-overlay-compact .project-facts dd { font-size: var(--project-fact-size); }
 .book-overlay-compact .book-right-page .tag-list { gap: .2rem; }
-.book-overlay-compact .book-right-page .tag-list span { padding: .2rem .32rem; font-size: .52rem; }
+.book-overlay-compact .book-right-page .tag-list span { padding: .2rem .32rem; font-size: var(--project-tag-size); }
 .book-overlay-compact .project-detail-groups { flex: 1 1 auto; grid-template-columns: repeat(2, minmax(0, 1fr)); align-items: stretch; gap: .7rem; margin-top: .5rem; padding-top: .45rem; }
 .book-overlay-compact .project-detail-group { display: flex; min-height: 0; flex-direction: column; }
-.book-overlay-compact .project-detail-group h4 { margin-bottom: .3rem; font-size: .56rem; }
+.book-overlay-compact .project-detail-group h4 { margin-bottom: .3rem; font-size: var(--project-section-label-size); }
 .book-overlay-compact .project-detail-group ul { flex: 1 1 auto; align-content: space-evenly; gap: .25rem; }
-.book-overlay-compact .project-detail-group li { padding-left: .7rem; font-size: .67rem; line-height: 1.3; }
+.book-overlay-compact .project-detail-group li { padding-left: .7rem; font-size: var(--project-detail-size); line-height: 1.3; }
 .book-overlay-compact .project-links { margin-top: auto; padding-top: .2rem; }
-.book-overlay-compact .project-links a { font-size: .68rem; }
-.book-overlay-compact .project-media-label { top: .8rem; right: .9rem; left: .9rem; font-size: .45rem; }
+.book-overlay-compact .project-links a { font-size: var(--project-link-size); }
+.book-overlay-compact .project-media-label { top: .8rem; right: .9rem; left: .9rem; font-size: var(--project-media-label-size); }
 .book-overlay-compact .page-scroll-rail { display: none; }
 .book-overlay-1 .project-detail-groups,
 .book-overlay-2 .project-detail-groups,
@@ -478,31 +510,13 @@ h2 { margin-bottom: 0; font-size: clamp(3.2rem, 2.1rem + 5.3vw, 8.5rem); }
 .book-overlay-3 .project-detail-group ul { flex: 1 1 auto; align-content: space-evenly; gap: .25rem; }
 .book-overlay-1 .project-detail-group li,
 .book-overlay-2 .project-detail-group li,
-.book-overlay-3 .project-detail-group li { font-size: .71rem; line-height: 1.29; }
+.book-overlay-3 .project-detail-group li { line-height: 1.29; }
 .book-overlay-1 .book-right-page h3,
 .book-overlay-2 .book-right-page h3,
-.book-overlay-3 .book-right-page h3 { font-size: clamp(1.6rem, 2vw, 2.2rem); line-height: .96; }
+.book-overlay-3 .book-right-page h3 { line-height: .96; }
 .book-overlay-1 .project-description,
 .book-overlay-2 .project-description,
-.book-overlay-3 .project-description { font-size: .83rem; line-height: 1.36; }
-.book-overlay-1 .project-number,
-.book-overlay-2 .project-number,
-.book-overlay-3 .project-number { font-size: .62rem; }
-.book-overlay-1 .project-facts dt,
-.book-overlay-2 .project-facts dt,
-.book-overlay-3 .project-facts dt { font-size: .65rem; }
-.book-overlay-1 .project-facts dd,
-.book-overlay-2 .project-facts dd,
-.book-overlay-3 .project-facts dd { font-size: clamp(.73rem, .75vw, .81rem); }
-.book-overlay-1 .book-right-page .tag-list span,
-.book-overlay-2 .book-right-page .tag-list span,
-.book-overlay-3 .book-right-page .tag-list span { font-size: .56rem; }
-.book-overlay-1 .project-detail-group h4,
-.book-overlay-2 .project-detail-group h4,
-.book-overlay-3 .project-detail-group h4 { font-size: .61rem; }
-.book-overlay-1 .project-links a,
-.book-overlay-2 .project-links a,
-.book-overlay-3 .project-links a { font-size: .73rem; }
+.book-overlay-3 .project-description { line-height: 1.36; }
 .book-overlay-1 .project-page-scroll,
 .book-overlay-2 .project-page-scroll,
 .book-overlay-3 .project-page-scroll { padding-bottom: clamp(.4rem, .7vw, .62rem); }
@@ -518,11 +532,11 @@ h2 { margin-bottom: 0; font-size: clamp(3.2rem, 2.1rem + 5.3vw, 8.5rem); }
 .book-overlay-4 .project-detail-group ul,
 .book-overlay-5 .project-detail-group ul { flex: 1 1 auto; align-content: space-evenly; gap: .18rem; }
 .book-overlay-4 .project-detail-group li,
-.book-overlay-5 .project-detail-group li { font-size: .61rem; line-height: 1.22; }
+.book-overlay-5 .project-detail-group li { line-height: 1.22; }
 .book-overlay-4 .book-right-page h3,
-.book-overlay-5 .book-right-page h3 { font-size: clamp(1.45rem, 1.75vw, 1.95rem); line-height: .95; }
+.book-overlay-5 .book-right-page h3 { line-height: .95; }
 .book-overlay-4 .project-description,
-.book-overlay-5 .project-description { font-size: .7rem; line-height: 1.28; }
+.book-overlay-5 .project-description { line-height: 1.28; }
 .book-overlay-4 .project-page-scroll,
 .book-overlay-5 .project-page-scroll { padding-bottom: clamp(.4rem, .7vw, .62rem); }
 .book-overlay-4 .project-links,
